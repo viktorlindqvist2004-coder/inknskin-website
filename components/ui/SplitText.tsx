@@ -86,7 +86,14 @@ const maskChild: Variants = {
   }),
 };
 
-/** Same reveal, but for arbitrary content instead of a string. */
+/**
+ * Same reveal, but for arbitrary content instead of a string.
+ *
+ * Three layers rather than two: the outer one carries the caller's layout
+ * classes and the viewport trigger, the middle one is `.mask-box` — which adds
+ * clip room above so Å/Ä/Ö keep their marks, see globals.css — and the inner
+ * one does the sliding.
+ */
 export function MaskUp({
   children,
   className = "",
@@ -100,15 +107,17 @@ export function MaskUp({
 }) {
   return (
     <motion.span
-      className={`block overflow-hidden ${className}`}
+      className={`block ${className}`}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount }}
       custom={delay}
     >
-      <motion.span variants={maskChild} className="block will-change-transform">
-        {children}
-      </motion.span>
+      <span className="mask-box">
+        <motion.span variants={maskChild} className="block will-change-transform">
+          {children}
+        </motion.span>
+      </span>
     </motion.span>
   );
 }

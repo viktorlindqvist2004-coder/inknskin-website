@@ -168,10 +168,37 @@
   );
 }
 
-/* Character/word masks used by the split-text reveals */
-.mask-line {
+/* ---- Reveal masks ----
+   The display face runs at line-height 0.86, so the line box is shorter than
+   the glyphs really are and a plain overflow:hidden slices the ring off Å and
+   the dots off Ä/Ö — "Så går det till" rendered as "Sa gar det till".
+
+   The padding extends the clip region upwards and the equal negative margin
+   puts the box back where it was, so nothing moves. Room is added above only;
+   the text still enters from below the mask, so nothing peeks out mid-reveal.
+
+   The value is a fixed length rather than an em: the mask sits outside the
+   heading, so an em would resolve against the mask's own 16px and give a few
+   pixels instead of the ~68px the largest heading needs. It only ever adds
+   invisible clip space, so being generous costs nothing. */
+@theme {
+  --mask-headroom: 5rem;
+}
+
+.mask-line,
+.mask-box {
   display: block;
   overflow: hidden;
+  padding-top: var(--mask-headroom);
+  margin-top: calc(var(--mask-headroom) * -1);
+  /* The box now overlaps whatever sits above it. Only the glyphs are painted
+     there, but keep it from swallowing hovers on the way past. */
+  pointer-events: none;
+}
+
+.mask-line > *,
+.mask-box > * {
+  pointer-events: auto;
 }
 
 .marquee-track {

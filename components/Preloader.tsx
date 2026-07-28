@@ -75,7 +75,7 @@ export default function Preloader() {
             </motion.div>
 
             {WORDS.map((w, i) => (
-              <span key={w} className="block overflow-hidden">
+              <span key={w} className="mask-line">
                 <motion.span
                   className="display t-xl block text-bone"
                   initial={{ y: "110%" }}

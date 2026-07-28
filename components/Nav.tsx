@@ -101,7 +101,7 @@ export default function Nav() {
           >
             <nav className="flex flex-col gap-2" aria-label="Mobilmeny">
               {nav.map((item, i) => (
-                <span key={item.href} className="overflow-hidden">
+                <span key={item.href} className="mask-line">
                   <motion.a
                     href={item.href}
                     onClick={() => setOpen(false)}
