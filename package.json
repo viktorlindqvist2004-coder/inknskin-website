@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npx serve out",
     "lint": "tsc --noEmit",
     "fetch-media": "node scripts/fetch-media.mjs",
     "fetch-reviews": "node scripts/fetch-google-reviews.mjs"

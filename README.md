@@ -67,16 +67,22 @@ node scripts/fetch-media.mjs          # → public/media/
 echo "NEXT_PUBLIC_MEDIA_SOURCE=local" >> .env.local
 ```
 
-Sätt samma miljövariabel i Vercels projektinställningar.
+Sätt samma miljövariabel i värdens projektinställningar.
 
-## Deploy till Vercel
+## Deploy
 
-1. **New Project** i Vercel → välj det här repot.
-2. Framework preset upptäcks automatiskt (Next.js). Root Directory lämnas som
-   den är — projektet ligger i repots rot. Inga byggkommandon behöver ändras.
-3. Lägg till miljövariabeln `NEXT_PUBLIC_MEDIA_SOURCE` (`local` eller `remote`).
-4. Peka domänen mot projektet och uppdatera `site.url` i `lib/site.ts` om
-   domänen blir en annan än `inknskintattoo.se`.
+Sidan byggs som en **helt statisk export** — `npm run build` lägger färdig
+HTML, CSS och JS i `out/`. Ingen server behövs, så den kan ligga på vilken
+statisk värd som helst.
+
+| Fält | Värde |
+| --- | --- |
+| Build command | `npm run build` |
+| Output directory | `out` |
+
+**Se [HANDOVER.md](./HANDOVER.md)** för hela överlämningen till studion,
+inklusive varför Vercels gratisplan inte får användas för en kundsajt och
+vilken värd som rekommenderas i stället.
 
 > Notera: `inknskintattoo.se` svarade inte med studions innehåll när den här
 > sidan byggdes — domänen verkar ha tappats och pekar nu någon annanstans.
