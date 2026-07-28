@@ -39,6 +39,9 @@ const work = (
   artist,
 });
 
+/* Ordningen är medvetet omlottlagd: rutnätet fördelar posterna kolumnvis med
+   index % antal kolumner, så varvade tatuerare ger en blandning i varje
+   kolumn i stället för att klumpa ihop dem. */
 export const portfolio: Work[] = [
   work(
     "arash-02-orm.jpg",
@@ -53,8 +56,8 @@ export const portfolio: Work[] = [
     "Nick",
   ),
   work(
-    "arash-01-skelett.jpg",
-    "Skelett i bön med draperi, svartgrå realism med punktskuggning på överarm",
+    "arash-03-tiger.jpg",
+    "Tigerblick i svartgrå realism med bärnstensfärgade ögon, underarm",
     "Realism",
     "Arash",
   ),
@@ -65,10 +68,28 @@ export const portfolio: Work[] = [
     "Nick",
   ),
   work(
+    "arash-01-skelett.jpg",
+    "Skelett i bön med draperi, svartgrå realism med punktskuggning på överarm",
+    "Realism",
+    "Arash",
+  ),
+  work(
     "nick-03-stjarna.jpg",
     "Stjärna med mjuk skuggning på överarm",
     "Old school",
     "Nick",
+  ),
+  work(
+    "arash-04-skalle.jpg",
+    "Ansikte som övergår i kranium, tät svartgrå detaljering på lår",
+    "Svartgrått",
+    "Arash",
+  ),
+  work(
+    "arash-05-serenity.jpg",
+    "Handskriven bön med kerub, duva och ornamentalt kors i rött, underarm",
+    "Lettering",
+    "Arash",
   ),
 ];
 
