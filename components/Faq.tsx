@@ -18,11 +18,11 @@ export default function Faq() {
           <h2 className="display t-lg text-bone">Frågor & svar</h2>
         </MaskUp>
 
-        <ul className="border-t border-bone/12">
+        <ul className="border-t border-gold/22">
           {faq.map((item, i) => {
             const isOpen = open === i;
             return (
-              <li key={item.q} className="border-b border-bone/12">
+              <li key={item.q} className="border-b border-gold/22">
                 <motion.button
                   onClick={() => setOpen(isOpen ? null : i)}
                   className="group flex w-full items-start justify-between gap-6 py-6 text-left"

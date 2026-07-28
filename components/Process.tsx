@@ -71,7 +71,7 @@ export default function Process() {
                 aria-hidden
               />
               <div className="flex items-baseline gap-4">
-                <span className="font-mono text-[0.7rem] tracking-[0.2em] text-muted">
+                <span className="font-mono text-[0.7rem] tracking-[0.2em] text-gold/60">
                   {step.n}
                 </span>
                 <h3 className="display text-[clamp(1.4rem,2.8vw,2.2rem)] text-bone">

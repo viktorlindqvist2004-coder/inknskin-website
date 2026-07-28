@@ -46,7 +46,7 @@ function FocusTags({ artist }: { artist: Artist }) {
       {artist.focus.map((f) => (
         <span
           key={f}
-          className="rounded-full border border-bone/18 px-3.5 py-1.5 text-[0.68rem] uppercase tracking-[0.14em] text-bone-dim transition-colors duration-500 group-hover:border-bone/35"
+          className="rounded-full border border-gold/30 px-3.5 py-1.5 text-[0.68rem] uppercase tracking-[0.14em] text-bone-dim transition-colors duration-500 group-hover:border-gold/55"
         >
           {f}
         </span>
@@ -97,7 +97,7 @@ function Solo({ artist }: { artist: Artist }) {
           />
         </ImageReveal>
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
-        <span className="absolute left-5 top-5 font-mono text-[0.7rem] tracking-[0.22em] text-bone/60">
+        <span className="absolute left-5 top-5 font-mono text-[0.7rem] tracking-[0.22em] text-gold">
           01
         </span>
       </div>
@@ -139,7 +139,7 @@ function Grid({ list }: { list: readonly Artist[] }) {
               className="h-full w-full object-cover grayscale transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06] group-hover:grayscale-0"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent" />
-            <span className="absolute left-5 top-5 font-mono text-[0.7rem] tracking-[0.22em] text-bone/60">
+            <span className="absolute left-5 top-5 font-mono text-[0.7rem] tracking-[0.22em] text-gold">
               0{i + 1}
             </span>
             <div className="absolute inset-x-5 bottom-5">

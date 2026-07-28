@@ -100,8 +100,8 @@ export default function Intro() {
 
 function Stat({ value, label }: { value: React.ReactNode; label: string }) {
   return (
-    <div className="border-t border-bone/12 pt-4">
-      <div className="display text-[clamp(2.2rem,5vw,3.6rem)] leading-none text-bone tabular-nums">
+    <div className="border-t border-gold/22 pt-4">
+      <div className="display text-[clamp(2.2rem,5vw,3.6rem)] leading-none text-gold tabular-nums">
         {value}
       </div>
       <div className="mt-2 text-[0.72rem] uppercase tracking-[0.16em] text-muted">

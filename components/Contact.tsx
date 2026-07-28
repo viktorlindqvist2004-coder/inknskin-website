@@ -56,7 +56,7 @@ export default function Contact() {
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="Karta"
-                className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-bone/25 px-9 py-5"
+                className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-gold/40 px-9 py-5"
               >
                 <span className="absolute inset-0 translate-y-full bg-bone/10 transition-transform duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0" />
                 <span className="relative z-10 text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-bone">
@@ -116,14 +116,14 @@ export default function Contact() {
                 {hours.staffed.map((h, i) => (
                   <motion.li
                     key={h.day}
-                    className="flex items-baseline justify-between gap-4 border-b border-bone/10 py-2.5 text-[0.88rem] last:border-b-0"
+                    className="flex items-baseline justify-between gap-4 border-b border-gold/18 py-2.5 text-[0.88rem] last:border-b-0"
                     initial={{ opacity: 0, x: -12 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, amount: 0.8 }}
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: i * 0.04 }}
                   >
                     <span className="text-bone-dim">{h.day}</span>
-                    <span className="h-px flex-1 bg-bone/10" aria-hidden />
+                    <span className="h-px flex-1 bg-gold/20" aria-hidden />
                     <span
                       className={h.time === "Stängt" ? "text-muted" : "text-bone tabular-nums"}
                     >

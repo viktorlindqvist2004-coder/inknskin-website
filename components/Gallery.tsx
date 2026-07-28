@@ -67,8 +67,8 @@ function Tile({
         <span className="text-[0.72rem] uppercase tracking-[0.16em] text-bone transition-colors duration-500 group-hover:text-gold">
           {work.style}
         </span>
-        <span className="h-px flex-1 bg-bone/12" aria-hidden />
-        <span className="text-[0.68rem] uppercase tracking-[0.14em] text-muted">
+        <span className="h-px flex-1 bg-gold/25" aria-hidden />
+        <span className="text-[0.68rem] uppercase tracking-[0.14em] text-gold/60">
           {work.placement}
         </span>
       </motion.figcaption>
@@ -167,7 +167,7 @@ export default function Gallery() {
           target="_blank"
           rel="noreferrer"
           data-cursor="Instagram"
-          className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-bone/25 px-8 py-4"
+          className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-gold/40 px-8 py-4"
         >
           <span className="absolute inset-0 translate-y-full bg-bone transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0" />
           <span className="relative z-10 text-[0.75rem] font-medium uppercase tracking-[0.18em] text-bone transition-colors duration-500 group-hover:text-ink">

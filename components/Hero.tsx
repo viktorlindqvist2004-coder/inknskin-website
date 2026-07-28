@@ -89,7 +89,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.div
-          className="mt-8 flex flex-col gap-8 border-t border-bone/12 pt-6 md:flex-row md:items-end md:justify-between"
+          className="mt-8 flex flex-col gap-8 border-t border-gold/22 pt-6 md:flex-row md:items-end md:justify-between"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 1.95 }}

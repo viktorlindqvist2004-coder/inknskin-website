@@ -15,11 +15,11 @@ export default function Services() {
       </MaskUp>
 
       <div className="relative mt-14">
-        <ul className="border-t border-bone/12">
+        <ul className="border-t border-gold/22">
           {services.map((s, i) => (
             <motion.li
               key={s.n}
-              className="group relative border-b border-bone/12"
+              className="group relative border-b border-gold/22"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
@@ -29,7 +29,7 @@ export default function Services() {
               <span className="pointer-events-none absolute inset-0 -z-10 origin-left scale-x-0 bg-gold/8 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
 
               <div className="flex flex-col gap-3 py-7 md:flex-row md:items-baseline md:gap-10">
-                <span className="font-mono text-[0.7rem] tracking-[0.2em] text-muted transition-colors duration-500 group-hover:text-gold md:w-14">
+                <span className="font-mono text-[0.7rem] tracking-[0.2em] text-gold/55 transition-colors duration-500 group-hover:text-gold md:w-14">
                   {s.n}
                 </span>
 

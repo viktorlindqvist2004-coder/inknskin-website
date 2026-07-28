@@ -6,6 +6,7 @@ import Preloader from "@/components/Preloader";
 import Nav from "@/components/Nav";
 import ScrollProgress from "@/components/ScrollProgress";
 import StructuredData from "@/components/StructuredData";
+import Ornament from "@/components/Ornament";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -53,12 +54,13 @@ export default function RootLayout({
     <html lang="sv" className="scroll-smooth">
       <body className="grain bg-ink text-bone antialiased">
         <StructuredData />
+        <Ornament />
         <Preloader />
         <SmoothScroll />
         <Cursor />
         <ScrollProgress />
         <Nav />
-        <main>{children}</main>
+        <main className="relative z-10">{children}</main>
       </body>
     </html>
   );

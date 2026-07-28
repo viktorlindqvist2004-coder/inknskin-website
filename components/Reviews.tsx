@@ -29,10 +29,10 @@ function Stars({ n }: { n: number }) {
 
 function Card({ review, skew }: { review: Review; skew: MotionValue<number> }) {
   return (
-    <motion.article style={{ skewY: skew }} className="mx-3 flex w-[clamp(19rem,29vw,26rem)] shrink-0 flex-col justify-between gap-6 rounded-sm border border-bone/12 bg-ink-2/80 p-7 md:backdrop-blur-sm transition-colors duration-500 hover:border-bone/25">
+    <motion.article style={{ skewY: skew }} className="mx-3 flex w-[clamp(19rem,29vw,26rem)] shrink-0 flex-col justify-between gap-6 rounded-sm border border-gold/22 bg-ink-2/80 p-7 md:backdrop-blur-sm transition-colors duration-500 hover:border-gold/40">
       <Stars n={review.rating} />
       <p className="text-[0.95rem] leading-relaxed text-bone/85">“{review.body}”</p>
-      <footer className="flex items-end justify-between gap-4 border-t border-bone/10 pt-4">
+      <footer className="flex items-end justify-between gap-4 border-t border-gold/18 pt-4">
         <div>
           <div className="text-[0.82rem] text-bone">{review.author}</div>
           {review.context ? (
@@ -82,7 +82,7 @@ export default function Reviews() {
                 <Stars n={Math.round(averageRating)} />
               </div>
             </div>
-            <div className="border-l border-bone/12 pl-8">
+            <div className="border-l border-gold/22 pl-8">
               <div className="display text-[clamp(1.8rem,4vw,3rem)] leading-none text-bone tabular-nums">
                 <Counter to={reviewCount} />
               </div>

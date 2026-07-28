@@ -12,7 +12,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-bone/10 pt-16">
+    <footer className="relative overflow-hidden border-t border-gold/18 pt-16">
       <div className="edge flex flex-col gap-10 pb-14 md:flex-row md:justify-between">
         <div className="flex flex-col gap-4">
           <motion.div
@@ -97,7 +97,7 @@ export default function Footer() {
         </span>
       </motion.div>
 
-      <div className="edge flex flex-col gap-2 border-t border-bone/10 py-6 text-[0.72rem] text-muted md:flex-row md:items-center md:justify-between">
+      <div className="edge flex flex-col gap-2 border-t border-gold/18 py-6 text-[0.72rem] text-muted md:flex-row md:items-center md:justify-between">
         <span>
           © {year} {site.legalName} · Est. {site.est}
         </span>

@@ -29,7 +29,7 @@ export default function Nav() {
         <div
           className={`edge flex items-center justify-between py-5 transition-colors duration-500 ${
             solid
-              ? "border-b border-bone/10 bg-ink/92 md:bg-ink/70 md:backdrop-blur-xl"
+              ? "border-b border-gold/18 bg-ink/92 md:bg-ink/70 md:backdrop-blur-xl"
               : "border-b border-transparent"
           }`}
         >
@@ -62,7 +62,7 @@ export default function Nav() {
               <a
                 href="#kontakt"
                 data-cursor="Boka"
-                className="group relative inline-flex items-center overflow-hidden rounded-full border border-bone/25 px-6 py-2.5 text-[0.72rem] font-medium uppercase tracking-[0.18em] text-bone"
+                className="group relative inline-flex items-center overflow-hidden rounded-full border border-gold/40 px-6 py-2.5 text-[0.72rem] font-medium uppercase tracking-[0.18em] text-bone"
               >
                 <span className="absolute inset-0 -z-0 translate-y-full bg-gold transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0" />
                 <span className="relative z-10 transition-colors duration-300 group-hover:text-ink">

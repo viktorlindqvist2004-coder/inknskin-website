@@ -15,7 +15,7 @@ const ITEMS = [
 
 export default function Ticker() {
   return (
-    <div className="relative border-y border-bone/10 bg-ink py-5">
+    <div className="relative border-y border-gold/18 bg-ink py-5">
       <Marquee baseSpeed={70} direction={-1}>
         {ITEMS.map((item, i) => (
           <span key={`${item}-${i}`} className="flex shrink-0 items-center">
