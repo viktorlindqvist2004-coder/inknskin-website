@@ -204,16 +204,9 @@ export default function Artists() {
       <div className="edge">
         <SectionHead index="04" label={solo ? "Tatueraren" : "Tatuerare"} />
 
-        <div className="mt-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <MaskUp>
-            <h2 className="display t-xl text-bone">Handen bakom</h2>
-          </MaskUp>
-          <p className="max-w-sm pb-3 text-[0.93rem] leading-relaxed text-bone-dim">
-            {solo
-              ? "En tatuerare, samma hand från skiss till sista linjen."
-              : "Säg vad du vill ha så säger vi vem som passar bäst."}
-          </p>
-        </div>
+        <MaskUp className="mt-10">
+          <h2 className="display t-xl text-bone">Handen bakom</h2>
+        </MaskUp>
 
         {solo ? <Solo artist={artists[0]} /> : <Grid list={artists} />}
       </div>
