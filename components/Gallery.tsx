@@ -69,7 +69,7 @@ function Tile({
         </span>
         <span className="h-px flex-1 bg-gold/25" aria-hidden />
         <span className="text-[0.68rem] uppercase tracking-[0.14em] text-gold/60">
-          {work.placement}
+          {work.artist}
         </span>
       </motion.figcaption>
     </motion.figure>
@@ -110,9 +110,14 @@ function Column({
 
 export default function Gallery() {
   const skew = useVelocitySkew(2.6);
-  const cols = portfolioColumns(3);
 
-  // Mobile shows two columns, so the third column's works are folded into them.
+  // Three columns need at least two works each to avoid a short, obviously
+  // empty third column — five works split 2/2/1 and left a gap. Falls back to
+  // two until the portfolio is big enough, then widens on its own.
+  const wide = portfolio.length >= 6;
+  const cols = portfolioColumns(wide ? 3 : 2);
+
+  // Mobile always shows two columns.
   const mobileCols = portfolioColumns(2);
 
   return (
@@ -137,11 +142,24 @@ export default function Gallery() {
       </div>
 
       <div className="edge mt-16">
-        {/* Desktop: three columns at different parallax speeds */}
-        <div className="hidden gap-6 md:grid md:grid-cols-3">
-          <Column works={cols[0]} speed={8} skew={skew} />
-          <Column works={cols[1]} speed={-10} skew={skew} className="pt-20" />
-          <Column works={cols[2]} speed={6} skew={skew} className="pt-8" />
+        {/* Desktop: columns at different parallax speeds.
+            The offsets are a percentage of column height, so two wide columns
+            travel far more pixels than three narrow ones for the same number —
+            enough that the rising column climbed over the section intro. The
+            two-column layout therefore runs at roughly half the speed. */}
+        <div
+          className={`hidden gap-6 md:grid ${wide ? "md:grid-cols-3" : "md:grid-cols-2"}`}
+        >
+          <Column works={cols[0]} speed={wide ? 8 : 4} skew={skew} />
+          <Column
+            works={cols[1]}
+            speed={wide ? -10 : -4}
+            skew={skew}
+            className={wide ? "pt-20" : "pt-12"}
+          />
+          {wide ? (
+            <Column works={cols[2]} speed={6} skew={skew} className="pt-8" />
+          ) : null}
         </div>
 
         {/* Mobile: two columns, every work still shown */}
