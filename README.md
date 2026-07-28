@@ -30,32 +30,32 @@ npm run fetch-reviews
 > att strukturerad data speglar verkligheten. Hämtar du via API:et sätts båda
 > exakt av sig självt.
 
-## ⚠️ Kvar innan sidan går live
+## Media
 
-### Åtta filer hämtas från ett CDN vi inte äger
+Sidan serverar **allt från egen domän**. Portfolion, porträtten och loggan
+ligger i repot. Stämningsmaterialet — de fyra filmerna och deras posterbilder —
+hämtas hem automatiskt första gången sidan byggs.
 
-Portfolion, porträtten och loggan ligger i repot. Men **stämningsmaterialet**
-— hero-videon, bläckvideon, bakgrunden bakom tatuerarna och videopanelen i
-kontaktsektionen, plus deras posterbilder — pekar fortfarande på ett CDN som
-hör till verktyget de genererades med. Försvinner det blir hero-videon svart
-utan att någon rört koden.
+Det sköts av `scripts/prepare-media.mjs`, som `npm run build` kör innan Next
+startar. Det gäller överallt: din dator, Vercel, Cloudflare Pages. Ingen
+miljövariabel, inget manuellt steg. Den som bara laddar upp filerna på GitHub
+och kopplar en värd får ändå en sida som inte hänger på någon annans server.
 
-Kolla när som helst:
+Filer som redan ligger i `public/media/` rörs aldrig. Vill du byta ut material
+lägger du din egen fil där med samma namn — då hoppas nedladdningen över.
+
+Går en fil inte att hämta **avbryts bygget**. Det är avsiktligt: alternativet
+vore att publicera en sida där hero-videon är svart, och ett rött kryss med ett
+begripligt felmeddelande är lättare att förstå än något som bara ser trasigt ut.
+
+Kontrollera när som helst att inget hämtas utifrån:
 
 ```bash
 npm run build && npm run check-media
 ```
 
-Hämta hem dem så sidan blir självförsörjande:
-
-```bash
-npm run fetch-media
-echo "NEXT_PUBLIC_MEDIA_SOURCE=local" >> .env.local
-npm run build && npm run check-media    # ska nu säga att inget hämtas utifrån
-```
-
-Sätt samma miljövariabel i värdens projektinställningar. **Gör det här innan
-lansering** — det är den enda kvarvarande externa beroendet.
+> **Committa gärna `public/media/` efter första bygget.** Då hämtas ingenting
+> alls i framtiden, och sidan är oberoende av den externa servern för gott.
 
 ### Portfolio och porträtt
 
@@ -78,18 +78,6 @@ npm run dev          # http://localhost:3000
 npm run build        # produktionsbygge
 npm run lint         # tsc --noEmit
 ```
-
-## Media: CDN eller egen domän
-
-Som standard laddas bilder och filmer från ett CDN. Inför lansering, hämta hem
-dem så att sidan är självförsörjande:
-
-```bash
-node scripts/fetch-media.mjs          # → public/media/
-echo "NEXT_PUBLIC_MEDIA_SOURCE=local" >> .env.local
-```
-
-Sätt samma miljövariabel i värdens projektinställningar.
 
 ## Deploy
 
@@ -180,7 +168,7 @@ Next har stöd för det.
 app/          layout, sida, globals.css, favicon, robots, sitemap, og.jpg
 components/   en fil per sektion + ui/ med animationsprimitiver
 lib/          innehåll, omdömen, portfolio, mediamanifest
-scripts/      fetch-media, check-media, fetch-google-reviews
+scripts/      prepare-media, check-media, fetch-google-reviews
 ```
 
 `components/ui/SplitText.tsx` innehåller en viktig detalj: det maskade barnet

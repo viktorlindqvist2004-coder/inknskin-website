@@ -124,7 +124,8 @@ till ett vanligt webbhotell, om studion redan betalar för ett.
 
 ## Kvar att göra innan lansering
 
-En av tre punkter är kvar. Alla står också i README.
+Inget blockerar längre en lansering. Punkterna nedan står kvar som historik och
+en kvarvarande kvalitetshöjning. Allt finns också i README.
 
 1. ~~Omdömena är platshållare~~ — **klart.** Tio riktiga Google-omdömen ligger
    nu i `lib/reviews.generated.json`, avskrivna ordagrant. Kontrollera att
@@ -138,14 +139,14 @@ En av tre punkter är kvar. Alla står också i README.
    och därför något mjukare än originalen; be om originalfilerna när tillfälle
    ges och byt dem i `lib/portfolio.ts`.
 
-3. **Åtta filer hämtas fortfarande från en server ni inte äger** — de fyra
-   filmerna och deras posterbilder. Kör `npm run handover` en gång, från en
-   dator med internet; kommandot hämtar hem dem, ställer om koden till de
-   lokala kopiorna och kontrollerar resultatet. Se `START.md`.
+3. ~~Åtta filer hämtas från en server ni inte äger~~ — **löst automatiskt.**
+   De fyra filmerna och deras posterbilder hämtas hem av `npm run build`, som
+   värden kör vid varje publicering, och serveras sedan från er egen domän.
+   Ingenting att komma ihåg och inget manuellt steg.
 
-   Görs det inte fungerar sidan ändå — men den dagen den servern släcks blir
-   hero-videon svart utan att någon rört koden. `npm run check-media` säger
-   till så länge det är kvar att göra.
+   Vill ni kapa beroendet helt: committa `public/media/` efter första bygget,
+   så hämtas ingenting alls i framtiden. `npm run check-media` bekräftar läget
+   när som helst.
 
 ---
 

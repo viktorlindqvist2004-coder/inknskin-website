@@ -1,18 +1,22 @@
 /**
- * Central mediamanifest.
+ * Mediamanifest för stämningsmaterialet — hero, studiosektionen, bakgrunden
+ * bakom tatuerarna och videopanelen i kontaktsektionen.
  *
- * Bilder och filmer är genererade som cinematiskt platshållarmaterial. De ligger
- * som standard på ett CDN. Kör `node scripts/fetch-media.mjs` för att ladda ner
- * allt till `public/media/` och sätt sedan NEXT_PUBLIC_MEDIA_SOURCE=local — då
- * serveras allt från din egen domän i stället (rekommenderat inför lansering).
+ * `src` pekar **alltid** på egen domän. Filerna hämtas hem automatiskt av
+ * `scripts/prepare-media.mjs`, som körs av `npm run build` innan Next startar.
+ * Ingen miljövariabel, inget manuellt steg, ingenting att komma ihåg — den som
+ * bara laddar upp filerna till GitHub och kopplar Vercel får ändå en sida som
+ * serverar allt själv.
  *
- * Byt gärna ut mot studions egna foton: behåll filnamnen i `local` och kör lokalt läge.
+ * `remote` är bara en nedladdningskälla för det skriptet, inte något sidan
+ * länkar till. Ligger filen redan i public/media/ rörs den inte.
+ *
+ * Byta ut material: lägg din egen fil i public/media/ med samma namn som står
+ * i `local`. Skriptet hoppar då över nedladdningen och din fil används.
  */
 
 const REMOTE_BASE =
   "https://d8j0ntlcm91z4.cloudfront.net/user_3Gp8ZSPuuM6vEtGDVPzKDrG4V4O/";
-
-const useLocal = process.env.NEXT_PUBLIC_MEDIA_SOURCE === "local";
 
 export type Asset = {
   src: string;
@@ -30,9 +34,8 @@ export function asset(
   height: number,
   alt: string,
 ): Asset {
-  const remote = REMOTE_BASE + remoteFile;
   const local = `/media/${localFile}`;
-  return { src: useLocal ? local : remote, local, remote, width, height, alt };
+  return { src: local, local, remote: REMOTE_BASE + remoteFile, width, height, alt };
 }
 
 export type VideoAsset = {
@@ -43,9 +46,8 @@ export type VideoAsset = {
 };
 
 function video(remoteFile: string, localFile: string, poster: Asset): VideoAsset {
-  const remote = REMOTE_BASE + remoteFile;
   const local = `/media/${localFile}`;
-  return { src: useLocal ? local : remote, local, remote, poster: poster.src };
+  return { src: local, local, remote: REMOTE_BASE + remoteFile, poster: poster.src };
 }
 
 export const images = {
@@ -104,8 +106,8 @@ export const videos = {
   ),
 } as const;
 
-/* Övriga bilder ligger utanför den här filen, eftersom de är riktiga foton som
-   alltid ska serveras från egen domän oavsett remote/local-växeln ovan:
+/* Övriga bilder ligger utanför den här filen, eftersom de alltid finns i repot
+   och aldrig behöver hämtas:
      · portfolion    → lib/portfolio.ts
      · tatuerarna    → `portrait` på varje person i lib/site.ts
      · loggan        → public/media/logo.png via components/ui/Logo.tsx */

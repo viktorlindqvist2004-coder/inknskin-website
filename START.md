@@ -1,83 +1,91 @@
 # Börja här
 
-Det här är hela webbplatsen för Ink N Skin, som källkod. Packa upp, kör ett
-kommando, lägg upp på GitHub. Räkna med tjugo minuter.
-
-Du behöver **Node.js 20 eller senare** (https://nodejs.org) och **internet**.
+Det här är hela webbplatsen för Ink N Skin. Du behöver **inte** installera
+något, inte öppna en terminal och inte kunna programmera. Packa upp mappen,
+ladda upp den på GitHub, koppla en värd. Räkna med tjugo minuter.
 
 ---
 
-## 1. Installera
+## 1. Packa upp
 
-```bash
-cd inknskin-website
-npm install
-```
+Packa upp `inknskin-website.zip`. Du får en mapp som heter `inknskin-website`
+med ett sextiotal filer i.
 
-## 2. Gör paketet självförsörjande
+Öppna den inte i något program — den ska bara laddas upp som den är.
 
-```bash
-npm run handover
-```
+## 2. Lägg upp den på GitHub
 
-**Det här steget är inte valfritt.** Fyra av filmerna och fyra bilder ligger
-ännu på en server som varken du eller studion äger. Kommandot hämtar hem dem,
-ställer om koden till att använda de lokala kopiorna, bygger sidan och
-kontrollerar att ingenting längre hämtas utifrån.
+1. Skapa ett konto på https://github.com/signup om du inte har ett.
+2. Gå till https://github.com/new
+3. Ge projektet ett namn, t.ex. `inknskin`.
+4. Välj **Private** om du inte vill att koden ska vara offentlig.
+5. Skapa **inte** README, .gitignore eller licens — de rutorna ska vara tomma.
+6. Klicka **Create repository**.
 
-Gör du inte det här ligger sidan och hänger på någon annans server, och den
-dagen den servern släcks blir hero-videon svart utan att någon rört koden.
+På nästa sida, klicka **uploading an existing file**.
 
-> Går det inte att köra? Kommandot avbryter utan att ha ändrat någonting, så
-> det är riskfritt att försöka igen. Vanligaste orsaken är blockerad utgående
-> trafik — prova en annan uppkoppling. Svarar servern inte alls längre måste
-> materialet ersättas; se avsnittet **Media** i `README.md`.
+Dra in **innehållet** i mappen `inknskin-website` — alltså filerna och
+undermapparna, inte den yttre mappen. Vänta tills allt laddats upp, skriv en
+rad i rutan längst ner och klicka **Commit changes**.
 
-## 3. Titta på den
+> Ser det fel ut efteråt? `package.json` ska ligga direkt i roten på repot, inte
+> i en undermapp. Ligger den fel drogs den yttre mappen in i stället för
+> innehållet — radera repot och gör om steget.
 
-```bash
-npm run dev
-```
+## 3. Publicera
 
-Öppna http://localhost:3000.
+1. Gå till https://vercel.com och logga in **med GitHub**.
+2. **Add New → Project**
+3. Välj repot du just skapade och klicka **Import**.
+4. Rör ingenting i inställningarna. Klicka **Deploy**.
 
-## 4. Lägg upp den på GitHub
+Vercel känner igen projektet av sig självt. Inga miljövariabler, inga
+byggkommandon att fylla i.
 
-Skapa ett tomt repo på GitHub — **utan** README, .gitignore eller licens.
-Sedan:
+Efter ett par minuter får du en adress som slutar på `.vercel.app`. Sidan är
+live.
 
-```bash
-git init
-git add -A
-git commit -m "Ink N Skin"
-git branch -M main
-git remote add origin https://github.com/ANVÄNDARE/REPO.git
-git push -u origin main
-```
+> Första bygget hämtar hem fyra filmer och fyra bilder som ligger på en extern
+> server och lägger dem på din egen. Det sker automatiskt. Skulle bygget
+> misslyckas med ett meddelande om media — klicka **Redeploy**. Nästan alltid
+> är det ett tillfälligt nätverksfel.
 
-## 5. Publicera
+## 4. Egen domän
 
-Cloudflare Pages, gratis och tillåter kundsajter:
+I Vercel: **Settings → Domains → Add**. Följ instruktionerna för DNS hos den
+som säljer domänen. SSL sköts automatiskt och kostar inget.
 
-**Workers & Pages → Create → Pages → Connect to Git** → välj repot.
+---
+
+## Läs det här om sidan är köpt av en kund
+
+Vercels gratisplan (Hobby) är enligt deras villkor **endast för personligt,
+icke-kommersiellt bruk**, och de får stänga av projekt som bryter mot det utan
+förvarning. En sida åt ett företag räknas som kommersiell användning.
+
+Vill man inte betala för Vercel Pro fungerar sidan lika bra på **Cloudflare
+Pages**, som uttryckligen tillåter kundsajter gratis. Samma flöde — logga in
+med GitHub, välj repot — men två fält får fyllas i:
 
 | Fält | Värde |
 | --- | --- |
-| Framework preset | `Next.js (Static HTML Export)` |
 | Build command | `npm run build` |
 | Build output directory | `out` |
 
-Inga miljövariabler behövs. Varje push till `main` bygger och publicerar om.
+`HANDOVER.md` går igenom valet, och vem som bör äga vilket konto.
 
 ---
 
-## Sedan då?
+## Ändra innehåll sedan
 
-| Fil | Vad den svarar på |
+Allt går att ändra direkt på github.com: klicka på filen, klicka på pennan,
+spara. Värden bygger om automatiskt.
+
+| Fil | Vad den styr |
 | --- | --- |
-| `HANDOVER.md` | Vem ska äga vad, och varför inte Vercel |
-| `README.md` | Hur sidan fungerar, hur man ändrar innehåll |
 | `lib/site.ts` | Adress, öppettider, tatuerare, tjänster, texter |
+| `lib/portfolio.ts` | Bilderna i portfolion |
+| `lib/reviews.generated.json` | Omdömena |
 
 ## Två saker att stämma av med studion
 

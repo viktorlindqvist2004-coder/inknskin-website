@@ -80,8 +80,10 @@ for (const [host, assets] of hosts) {
   console.log();
 }
 console.log(`Totalt ${total} filer på en värd du inte kontrollerar.`);
-console.log("Hämta hem dem så sidan blir självförsörjande:\n");
-console.log("   npm run fetch-media");
-console.log('   echo "NEXT_PUBLIC_MEDIA_SOURCE=local" >> .env.local');
-console.log("   npm run build && npm run check-media\n");
+console.log(
+  "\nDet ska normalt inte kunna hända: `npm run build` hämtar hem allt\n" +
+    "stämningsmaterial innan Next startar. Ligger filer kvar på en extern\n" +
+    "värd har någon lagt in en adress för hand — lägg filen i public/media/\n" +
+    "och peka på /media/... i stället.\n",
+);
 process.exit(1);
