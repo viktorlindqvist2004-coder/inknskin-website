@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import Logo from "@/components/ui/Logo";
-import { site } from "@/lib/site";
+import { contact, site } from "@/lib/site";
 import { useEffect, useState } from "react";
 
 const WORDS = ["INK", "N", "SKIN"];
@@ -61,7 +61,7 @@ export default function Preloader() {
         >
           <div className="flex items-start justify-between">
             <span className="eyebrow">Trollhättan · Sverige</span>
-            <span className="eyebrow">Kungsgatan 16B</span>
+            <span className="eyebrow">{contact.street}</span>
           </div>
 
           <div className="flex flex-col items-start">

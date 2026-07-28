@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { artists } from "@/lib/site";
-import { images, videos, arashPortrait } from "@/lib/media";
+import { images, videos, arashPortrait, nickPortrait } from "@/lib/media";
 import { MaskUp } from "@/components/ui/SplitText";
 import SectionHead from "@/components/ui/SectionHead";
 import ImageReveal from "@/components/ui/ImageReveal";
@@ -12,15 +12,16 @@ import AutoVideo from "@/components/ui/AutoVideo";
 type Artist = (typeof artists)[number];
 
 /**
- * Ett porträtt per tatuerare, i samma ordning som `artists`. Först ligger
- * Arash riktiga foto, så han behåller det oavsett om sektionen renderar
- * porträttlayouten eller rutnätet. Resten är platshållare tills studion
- * har foton på fler.
+ * Ett porträtt per tatuerare, i samma ordning som `artists`. De två första är
+ * riktiga foton; sista posten är en platshållare om studion växer igen.
  */
-const PORTRAITS: { src: string; alt: string }[] = [
-  arashPortrait,
-  images.arm,
-  images.fineline,
+const PORTRAITS: { src: string; alt: string; objectPosition: string }[] = [
+  // Arash foto är nästan kvadratiskt, så en stående ram klipper i sidled.
+  // Beskärningen dras åt höger så huvudet och maskinen ryms.
+  { ...arashPortrait, objectPosition: "92% center" },
+  // Nicks är redan 4:5 och behöver ingen förskjutning.
+  { ...nickPortrait, objectPosition: "center" },
+  { ...images.arm, objectPosition: "center" },
 ];
 
 const linkOf = (a: Artist) => ("handleUrl" in a ? a.handleUrl : undefined);
@@ -133,7 +134,8 @@ function Grid({ list }: { list: readonly Artist[] }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={(PORTRAITS[i] ?? PORTRAITS[0]).src}
-              alt=""
+              alt={(PORTRAITS[i] ?? PORTRAITS[0]).alt}
+              style={{ objectPosition: (PORTRAITS[i] ?? PORTRAITS[0]).objectPosition }}
               loading="lazy"
               decoding="async"
               className="h-full w-full object-cover grayscale transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06] group-hover:grayscale-0"
@@ -168,7 +170,10 @@ export default function Artists() {
   });
   const bgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
 
-  const solo = artists.length === 1;
+  // `artists` är `as const`, så .length blir en literal typ och en direkt
+  // jämförelse mot 1 avvisas av TypeScript. Vidga till number — layouten ska
+  // fortfarande kunna växla tillbaka om studion går ner till en tatuerare.
+  const solo = (artists as readonly Artist[]).length === 1;
 
   return (
     <section

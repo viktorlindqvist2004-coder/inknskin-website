@@ -149,3 +149,14 @@ export const arashPortrait = {
   height: 1197,
   alt: "Arash koncentrerad över ett pågående jobb i studion",
 } as const;
+
+/**
+ * Nick, beskuren ur hans Instagram-profilbild. Källan är liten, så bilden är
+ * något mjuk — byt gärna mot ett riktigt porträtt när ett finns.
+ */
+export const nickPortrait = {
+  src: "/media/nick.jpg",
+  width: 1000,
+  height: 1250,
+  alt: "Nick, tatuerare på Ink N Skin",
+} as const;

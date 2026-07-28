@@ -1,8 +1,11 @@
 /**
  * All studio content lives here so copy can be edited without touching components.
  *
- * Facts below (address, artists, staffed hours, socials) were gathered from public
- * listings for Ink N Skin Tatuering Studio, Trollhättan. Verify before launch.
+ * Gatuadressen kommer från studions egen Instagram-profil och från Nicks
+ * (båda anger Kungsgatan 3). Företagsregistren listar fortfarande Kungsgatan
+ * 16B — den uppgiften verkar vara inaktuell. Bekräfta med studion.
+ *
+ * Öppettider kommer från en publik katalog och bör också dubbelkollas.
  */
 
 export const site = {
@@ -14,7 +17,7 @@ export const site = {
   est: 2023,
   url: "https://inknskintattoo.se",
   description:
-    "Tatueringsstudio mitt i Trollhättan. Custom design, fineline, blackwork och cover-up av Arash på Kungsgatan 16B.",
+    "Tatueringsstudio mitt i Trollhättan med över 13 års erfarenhet i branschen. Tatueringar i de flesta stilar och piercing, av Arash och Nick på Kungsgatan 3.",
 } as const;
 
 type Contact = {
@@ -33,12 +36,12 @@ type Contact = {
 };
 
 export const contact: Contact = {
-  street: "Kungsgatan 16B",
+  street: "Kungsgatan 3",
   postal: "461 63",
   city: "Trollhättan",
   country: "Sverige",
   mapsUrl:
-    "https://www.google.com/maps/search/?api=1&query=Ink+N+Skin+Kungsgatan+16B+461+63+Trollh%C3%A4ttan",
+    "https://www.google.com/maps/search/?api=1&query=Ink+N+Skin+Kungsgatan+3+461+63+Trollh%C3%A4ttan",
   instagram: "https://www.instagram.com/inknskintattoo/",
   instagramHandle: "@inknskintattoo",
   tiktok: "https://www.tiktok.com/@inknskintattoo",
@@ -74,6 +77,14 @@ export const artists = [
     bio: "Startade Ink N Skin på Kungsgatan. Tatuerar allt — från millimeterprecis fineline till massiv blackwork.",
     focus: ["Fineline", "Blackwork", "Lettering", "Cover-up", "Ornamental"],
   },
+  {
+    name: "Nick",
+    role: "Tatuerare",
+    handle: "@nickk_tattooer",
+    handleUrl: "https://www.instagram.com/nickk_tattooer/",
+    bio: "Bygger i färg och realism, med rötterna i old school och japanskt. Stora motiv som tål att byggas över flera sittningar.",
+    focus: ["Color work", "Realism", "Old school", "Japanese"],
+  },
 ] as const;
 
 export const services = [
@@ -107,6 +118,11 @@ export const services = [
     title: "Retusch",
     body: "Uppfräschning av linjer och kontrast. Även andras jobb.",
   },
+  {
+    n: "07",
+    title: "Piercing",
+    body: "Steril utrustning och smycken som håller. Hör av dig för tid.",
+  },
 ] as const;
 
 export const process = [
@@ -135,7 +151,7 @@ export const process = [
 export const faq = [
   {
     q: "Hur bokar jag tid?",
-    a: "DM på Instagram @inknskintattoo, eller kom förbi Kungsgatan 16B mån–fre 12:00–16:30. Andra tider går också att boka.",
+    a: "DM på Instagram @inknskintattoo, eller kom förbi Kungsgatan 3 mån–fre 12:00–16:30. Andra tider går också att boka.",
   },
   {
     q: "Vad kostar det?",

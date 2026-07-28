@@ -1,7 +1,7 @@
 # Ink N Skin — tatueringsstudio i Trollhättan
 
 Enkelsidig, animationstung webbplats för Ink N Skin Tatuering Studio,
-Kungsgatan 16B, Trollhättan. Byggd för deploy på Vercel.
+Kungsgatan 3, Trollhättan. Byggs som en statisk sida — se HANDOVER.md.
 
 **Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 ·
 Motion (Framer Motion) · Lenis · självhostade variabla typsnitt via Fontsource.

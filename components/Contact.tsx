@@ -155,7 +155,7 @@ export default function Contact() {
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-ink/30" />
           <div className="absolute inset-x-6 bottom-6 flex items-end justify-between gap-4">
             <div>
-              <span className="eyebrow">Kungsgatan 16B</span>
+              <span className="eyebrow">{contact.street}</span>
               <p className="display mt-2 text-[1.6rem] leading-none text-bone">
                 Trollhättan
               </p>
