@@ -104,6 +104,15 @@ export const reviewCount = REVIEWS_VERIFIED
   ? generated.userRatingCount || fetched.length
   : reviews.length;
 
+/**
+ * True när `userRatingCount` är ett avrundat golv ("över 90") snarare än en
+ * exakt siffra. Sidan skriver då ut "Över" framför talet, så den aldrig påstår
+ * en precision den inte har. Sätts automatiskt av fetch-skriptet till false,
+ * eftersom Google då lämnar den exakta siffran.
+ */
+export const reviewCountApprox =
+  REVIEWS_VERIFIED && Boolean((generated as { userRatingCountApprox?: boolean }).userRatingCountApprox);
+
 export const averageRating = REVIEWS_VERIFIED
   ? (generated.rating ??
       Math.round((fetched.reduce((s, r) => s + r.rating, 0) / fetched.length) * 10) / 10)

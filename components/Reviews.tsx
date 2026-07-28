@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type MotionValue } from "motion/react";
-import { reviews, reviewCount, averageRating, REVIEWS_VERIFIED, type Review } from "@/lib/reviews";
+import { reviews, reviewCount, reviewCountApprox, averageRating, REVIEWS_VERIFIED, type Review } from "@/lib/reviews";
 import Marquee from "@/components/ui/Marquee";
 import Counter from "@/components/ui/Counter";
 import { MaskUp } from "@/components/ui/SplitText";
@@ -99,11 +99,16 @@ export default function Reviews() {
               </div>
             </div>
             <div className="border-l border-gold/22 pl-8">
-              <div className="display text-[clamp(1.8rem,4vw,3rem)] leading-none text-bone tabular-nums">
+              <div className="display flex items-baseline gap-2 text-[clamp(1.8rem,4vw,3rem)] leading-none text-bone tabular-nums">
+                {reviewCountApprox ? (
+                  <span className="text-[0.42em] uppercase tracking-[0.14em] text-gold">
+                    Över
+                  </span>
+                ) : null}
                 <Counter to={reviewCount} />
               </div>
               <div className="mt-2 text-[0.7rem] uppercase tracking-[0.16em] text-muted">
-                omdömen
+                recensioner på Google
               </div>
             </div>
           </motion.div>
@@ -112,10 +117,9 @@ export default function Reviews() {
         {process.env.NODE_ENV !== "production" && !REVIEWS_VERIFIED ? (
           <p className="mt-8 rounded-sm border border-gold/40 bg-gold/10 px-4 py-3 text-[0.8rem] text-bone">
             <strong>Endast synligt i utvecklingsläge:</strong> omdömena nedan är
-            platshållare. Ersätt dem med riktiga omdömen i{" "}
-            <code className="text-gold">lib/reviews.ts</code> innan sidan
-            lanseras, och sätt <code className="text-gold">REVIEWS_VERIFIED</code>{" "}
-            till true.
+            platshållare. Kör{" "}
+            <code className="text-gold">npm run fetch-reviews</code> för att
+            hämta de riktiga — sidan växlar över automatiskt.
           </p>
         ) : null}
       </div>

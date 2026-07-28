@@ -8,26 +8,31 @@ Motion (Framer Motion) · Lenis · självhostade variabla typsnitt via Fontsourc
 
 ---
 
-## ⚠️ Två saker MÅSTE göras innan sidan går live
+## Omdömen
 
-### 1. Omdömena är platshållare
+`lib/reviews.generated.json` innehåller **tio riktiga Google-omdömen**,
+avskrivna ordagrant. Texterna får inte redigeras — Googles villkor kräver att
+omdömen återges som de publicerats.
 
-Texterna i `lib/reviews.ts` är **exempel** — de är inte riktiga kundomdömen.
-Att publicera påhittade omdömen som äkta är vilseledande marknadsföring och
-bryter mot Googles villkor.
+Sidan växlar automatiskt: så fort den filen har omdömen används de, annars
+faller den tillbaka på exempeltexterna i `lib/reviews.ts`. Ingen flagga att
+sätta, ingen kod att ändra.
 
-Hämta de riktiga:
+Uppdatera dem automatiskt när det kommit nya:
 
 ```bash
-export GOOGLE_MAPS_API_KEY=...        # Places API (New) måste vara aktiverat
-node scripts/fetch-google-reviews.mjs # skriver lib/reviews.generated.json
+export GOOGLE_MAPS_API_KEY=...   # Places API (New) måste vara aktiverat
+npm run fetch-reviews
 ```
 
-Lägg sedan in dem i `lib/reviews.ts` och sätt `REVIEWS_VERIFIED = true`.
-Först då skickas `aggregateRating` ut i den strukturerade datan — sidan
-påstår aldrig något om betyg som inte är verifierat.
+> `userRatingCount` (90) och `rating` (5) är satta för hand och går ut i
+> strukturerad data. Kontrollera dem mot studions Google-profil — Google kräver
+> att strukturerad data speglar verkligheten. Hämtar du via API:et sätts båda
+> exakt av sig självt.
 
-### 2. Bilderna och filmerna är AI-genererat stämningsmaterial
+## ⚠️ Kvar innan sidan går live
+
+### Bilderna och filmerna är AI-genererat stämningsmaterial
 
 Allt media är genererat, inte fotograferat i studion. Det föreställer ingen
 verklig person och inga verkliga tatueringar gjorda av studion.

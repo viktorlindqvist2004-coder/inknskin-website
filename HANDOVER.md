@@ -127,11 +127,12 @@ till ett vanligt webbhotell, om studion redan betalar för ett.
 Två saker är fortfarande platshållare och bör vara på plats innan sidan är
 publik. Båda står också i README.
 
-1. **Omdömena i `lib/reviews.ts` är exempeltexter**, inte riktiga kundomdömen.
-   Kör `npm run fetch-reviews` för att hämta de äkta från Google. Sidan skickar
-   medvetet inte ut något betyg i strukturerad data förrän
-   `REVIEWS_VERIFIED = true`, så den påstår aldrig något overifierat — men
-   texterna syns för besökare och måste bytas.
+1. ~~Omdömena är platshållare~~ — **klart.** Tio riktiga Google-omdömen ligger
+   nu i `lib/reviews.generated.json`, avskrivna ordagrant. Kontrollera att
+   `userRatingCount` (90) och `rating` (5) stämmer mot studions Google-profil;
+   de siffrorna går ut i strukturerad data och ska spegla verkligheten. Kör
+   `npm run fetch-reviews` med en Places API-nyckel för att uppdatera dem
+   automatiskt i framtiden.
 
 2. **Portfoliobilderna är AI-genererat material**, inte studions egna jobb.
    Byt dem i `lib/portfolio.ts`. Fotot på Arash och loggan är däremot äkta.

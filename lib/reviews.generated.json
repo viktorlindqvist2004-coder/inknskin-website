@@ -1,8 +1,70 @@
 {
-  "_comment": "Skrivs av `npm run fetch-reviews`. Så länge reviews-listan är tom använder sidan platshållarna i lib/reviews.ts.",
+  "_comment": "Riktiga Google-omdömen, avskrivna ordagrant från studions Google-profil 2026-07-28. Skrivs över av `npm run fetch-reviews` om en Places API-nyckel används. Texterna får inte redigeras — Googles villkor kräver att omdömen återges som de publicerats.",
   "placeId": null,
-  "fetchedAt": null,
-  "rating": null,
-  "userRatingCount": 0,
-  "reviews": []
+  "fetchedAt": "2026-07-28",
+  "rating": 5,
+  "userRatingCount": 90,
+  "userRatingCountApprox": true,
+  "reviews": [
+    {
+      "author": "Sabina Falkirk",
+      "rating": 5,
+      "body": "Har tatuerat mig hos andra tidigare men hittade Arash av en slump och herregud så glad jag är för det! NU äntligen har jag hittat MIN tatuerare. Arash är så lyhörd och närvarande i alla steg. Vi ändrade lite kring min tatuering och Arash var hela tiden noga med att se till så att jag var nöjd innan vi satte igång. Och tatueringen är så vacker och välgjord. Skulle rekommendera honom till alla! ✨ Så glad att jag äntligen hittat en tatuerare jag vill fortsätta gå till, kommer aldrig gå till någon annan!",
+      "source": "Google"
+    },
+    {
+      "author": "Emil",
+      "rating": 5,
+      "body": "Jätte duktig tatuera och väldigt trevlig. Gjorde min första tatuering där och är väldigt nöjd med hur det blev.",
+      "source": "Google"
+    },
+    {
+      "author": "Hannah Hellström",
+      "rating": 5,
+      "body": "Han är otroligt inlyssnande, väldigt mänsklig i sitt bemötande och verkligen duktig på det han gör. Man känner sig både sedd och trygg genom hela processen. Är supernöjd och kan varmt rekommendera! 🤩",
+      "source": "Google"
+    },
+    {
+      "author": "Gustav Blom",
+      "rating": 5,
+      "body": "Skulle starkt rekommendera denna studion, riktigt trevlig personal och bra priser.",
+      "source": "Google"
+    },
+    {
+      "author": "Alva Andersson",
+      "rating": 5,
+      "body": "Arash är super duktig på det han gör och tar verkligen in vad kunden vill, tycker och känner. Supernöjd med mina tatueringar. Rekommenderar starkt för nån som ska göra sin första och inte vet vart man ska gå men även för dom som vill utforska nya tatuerare!! 10/10",
+      "source": "Google"
+    },
+    {
+      "author": "Kevin Skogsberg",
+      "rating": 5,
+      "body": "Letat efter en ny tatuerare ett tag och blev rekommenderad till Arash och är mer än nöjd med Arash arbete. Perfekta linjer, skuggningar och positionering. Gled på som smör från start till slut, kommer komma tillbaka för nästa.\n\nRekommenderas starkt!",
+      "source": "Google"
+    },
+    {
+      "author": "Ellen Ringhage",
+      "rating": 5,
+      "body": "Arash gjorde min första tatuering, är super nöjd! Trevlig och väldigt duktig!",
+      "source": "Google"
+    },
+    {
+      "author": "Sophie Ahl",
+      "rating": 5,
+      "body": "Åkte hit för min första tatuering och jag var så hemskt nervös men så fort vi kom in så var han så hemskt snäll och fantastisk. Han gjorde tatuering EXAKT som jag ville men till och med bättre än vad jag trodde😍 Rekommenderar jättemycket, kommer absolut komma tillbaka🥰",
+      "source": "Google"
+    },
+    {
+      "author": "Yvonne Lentz",
+      "rating": 5,
+      "body": "Lätt och säker på hand, riktigt duktig på små detaljer. Grymt nöjd med mina tatueringar hos Arash😄 Rekomenderas starkt!",
+      "source": "Google"
+    },
+    {
+      "author": "Lukas Settergren",
+      "rating": 5,
+      "body": "Arash är riktigt bra på sitt jobb fantastiskt arbete. Är jätte nöjd med min tatuering bra bemötande och jätte trevlig.",
+      "source": "Google"
+    }
+  ]
 }
