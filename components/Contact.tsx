@@ -146,8 +146,7 @@ export default function Contact() {
           >
             <motion.div className="h-[118%] w-full" style={{ y: videoY }}>
               <AutoVideo
-                src={videos.heroVertical.src}
-                poster={videos.heroVertical.poster}
+                clip={videos.heroVertical}
                 className="h-full w-full object-cover"
               />
             </motion.div>

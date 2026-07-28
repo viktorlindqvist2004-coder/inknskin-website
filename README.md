@@ -30,32 +30,47 @@ npm run fetch-reviews
 > att strukturerad data speglar verkligheten. Hämtar du via API:et sätts båda
 > exakt av sig självt.
 
-## ⚠️ Kvar innan sidan går live
+## Media
 
-### Åtta filer hämtas från ett CDN vi inte äger
-
-Portfolion, porträtten och loggan ligger i repot. Men **stämningsmaterialet**
-— hero-videon, bläckvideon, bakgrunden bakom tatuerarna och videopanelen i
-kontaktsektionen, plus deras posterbilder — pekar fortfarande på ett CDN som
-hör till verktyget de genererades med. Försvinner det blir hero-videon svart
-utan att någon rört koden.
-
-Kolla när som helst:
+**Sidan hämtar ingenting från externa värdar.** All media ligger i `public/`
+och serveras från egen domän. Kontrollera när som helst:
 
 ```bash
 npm run build && npm run check-media
 ```
 
-Hämta hem dem så sidan blir självförsörjande:
+### Videoslingorna
+
+De fyra looparna — hero, studiosektionen, bakgrunden bakom tatuerarna och
+kontaktpanelen — är byggda av studions egna foton med en långsam åkning.
+Varje loop är renderad framlänges och sedan hopfogad med sin spegelvändning,
+så sista bildrutan är identisk med den första och loopen inte hoppar.
+
+Varje loop finns i två format: `.mp4` (H.264) som Safari och iOS spelar, och
+`.webm` (VP9) som reserv för byggen utan patentbelagda kodekar. Webbläsaren
+väljer själv den första den klarar. Bredvid ligger en `-poster.jpg` som visas
+medan filmen laddar.
+
+Byta ut en, eller lägga till en ny:
 
 ```bash
-npm run fetch-media
-echo "NEXT_PUBLIC_MEDIA_SOURCE=local" >> .env.local
-npm run build && npm run check-media    # ska nu säga att inget hämtas utifrån
+node scripts/make-loop.mjs public/media/portfolio/arash-04-skalle.jpg ink-bloom
 ```
 
-Sätt samma miljövariabel i värdens projektinställningar. **Gör det här innan
-lansering** — det är den enda kvarvarande externa beroendet.
+Skriptet gör åkningen, spegelvänder den och skriver `.mp4`, `.webm` och postern
+på en gång. Peka sedan om raden i `lib/media.ts` — `clip("<namn>")` plockar upp
+alla tre filerna. Kräver `ffmpeg` i PATH (eller en sökväg i `FFMPEG`); det är
+medvetet inget npm-beroende eftersom det bara behövs när materialet byts.
+
+Gör du en loop för hand: inget ljudspår — webbläsare är strängare mot media som
+kan låta, och autoplay nekas oftare då.
+
+**Autoplay.** `components/ui/AutoVideo.tsx` gör mer än `<video autoPlay>`: den
+tvingar `muted` på elementet innan första laddningen, gör om försöket på
+`loadeddata` och `canplay`, pausar allt som är utanför vyn så en telefon aldrig
+avkodar fyra filmer samtidigt, och startar på första gesten om iOS Low Power
+Mode nekat autoplay. Rör den varsamt — varje del finns för att en specifik
+webbläsare annars visar en play-knapp i stället för att spela.
 
 ### Portfolio och porträtt
 
@@ -79,17 +94,6 @@ npm run build        # produktionsbygge
 npm run lint         # tsc --noEmit
 ```
 
-## Media: CDN eller egen domän
-
-Som standard laddas bilder och filmer från ett CDN. Inför lansering, hämta hem
-dem så att sidan är självförsörjande:
-
-```bash
-node scripts/fetch-media.mjs          # → public/media/
-echo "NEXT_PUBLIC_MEDIA_SOURCE=local" >> .env.local
-```
-
-Sätt samma miljövariabel i värdens projektinställningar.
 
 ## Deploy
 
@@ -118,7 +122,8 @@ Nästan all text ligger i två filer:
 | ----------------- | ------------------------------------------------------------ |
 | `lib/site.ts`     | Adress, öppettider, tatuerare, tjänster, process, FAQ, meny   |
 | `lib/reviews.ts`  | Omdömen                                                       |
-| `lib/media.ts`    | Bild- och filmmanifest                                        |
+| `lib/media.ts`    | Videoslingorna och deras posterbilder                          |
+| `lib/portfolio.ts`| Portfolion                                                     |
 
 Uppgifterna om studion (adress, tatuerare, bemannade tider) är hämtade från
 publika företagslistningar — **dubbelkolla dem med studion** innan lansering.
@@ -180,7 +185,7 @@ Next har stöd för det.
 app/          layout, sida, globals.css, favicon, robots, sitemap, og.jpg
 components/   en fil per sektion + ui/ med animationsprimitiver
 lib/          innehåll, omdömen, portfolio, mediamanifest
-scripts/      fetch-media, check-media, fetch-google-reviews
+scripts/      make-loop, check-media, fetch-google-reviews
 ```
 
 `components/ui/SplitText.tsx` innehåller en viktig detalj: det maskade barnet

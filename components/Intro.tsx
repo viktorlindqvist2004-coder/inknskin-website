@@ -75,8 +75,7 @@ export default function Intro() {
             style={{ y: inkY, scale: inkScale }}
           >
             <AutoVideo
-              src={videos.ink.src}
-              poster={videos.ink.poster}
+              clip={videos.ink}
               className="h-full w-full object-cover opacity-90"
             />
           </motion.div>

@@ -21,13 +21,11 @@ import { useEffect, useRef } from "react";
  * is never decoding four films at once while you scroll.
  */
 export default function AutoVideo({
-  src,
-  poster,
+  clip,
   className = "",
   style,
 }: {
-  src: string;
-  poster?: string;
+  clip: { mp4: string; webm: string; poster: string };
   className?: string;
   style?: React.CSSProperties;
 }) {
@@ -72,10 +70,24 @@ export default function AutoVideo({
     };
     document.addEventListener("visibilitychange", onVisibility);
 
+    // Last resort. iOS refuses autoplay outright in Low Power Mode, and no
+    // amount of correct markup changes that — the block is at the OS level and
+    // only lifts once the visitor interacts. Start on the first gesture so the
+    // page recovers instead of sitting on a still frame for the whole visit.
+    const kick = () => {
+      attempt();
+      for (const ev of ["pointerdown", "touchstart", "keydown", "scroll"])
+        window.removeEventListener(ev, kick);
+    };
+    for (const ev of ["pointerdown", "touchstart", "keydown", "scroll"])
+      window.addEventListener(ev, kick, { once: false, passive: true });
+
     return () => {
       el.removeEventListener("loadeddata", attempt);
       el.removeEventListener("canplay", attempt);
       document.removeEventListener("visibilitychange", onVisibility);
+      for (const ev of ["pointerdown", "touchstart", "keydown", "scroll"])
+        window.removeEventListener(ev, kick);
       io.disconnect();
     };
   }, []);
@@ -85,8 +97,7 @@ export default function AutoVideo({
       ref={ref}
       className={className}
       style={style}
-      src={src}
-      poster={poster}
+      poster={clip.poster}
       autoPlay
       muted
       loop
@@ -97,6 +108,11 @@ export default function AutoVideo({
       preload="metadata"
       tabIndex={-1}
       aria-hidden
-    />
+    >
+      {/* H.264 först — det är den enda kodeken Safari/iOS spelar. WebM finns
+          som reserv för byggen utan patentbelagda kodekar. */}
+      <source src={clip.mp4} type="video/mp4" />
+      <source src={clip.webm} type="video/webm" />
+    </video>
   );
 }

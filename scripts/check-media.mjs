@@ -26,6 +26,15 @@ const LINK_ONLY = [
   "www.w3.org",
 ];
 
+/**
+ * Sidans egen domän räknas inte som extern. Delningsbilden måste anges med
+ * absolut URL för att Facebook och X ska hitta den, så den dyker upp här trots
+ * att filen ligger i public/.
+ */
+const site = await readFile(join(dirname(fileURLToPath(import.meta.url)), "..", "lib", "site.ts"), "utf8");
+const ownHost = site.match(/url:\s*"https?:\/\/([^/"]+)/)?.[1];
+if (ownHost) LINK_ONLY.push(ownHost);
+
 async function walk(dir) {
   const out = [];
   for (const e of await readdir(dir, { withFileTypes: true })) {

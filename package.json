@@ -8,7 +8,6 @@
     "build": "next build",
     "start": "npx serve out",
     "lint": "tsc --noEmit",
-    "fetch-media": "node scripts/fetch-media.mjs",
     "fetch-reviews": "node scripts/fetch-google-reviews.mjs",
     "check-media": "node scripts/check-media.mjs"
   },
