@@ -32,24 +32,41 @@ npm run fetch-reviews
 
 ## ⚠️ Kvar innan sidan går live
 
-### Bilderna och filmerna är AI-genererat stämningsmaterial
+### Åtta filer hämtas från ett CDN vi inte äger
 
-Allt media är genererat, inte fotograferat i studion. Det föreställer ingen
-verklig person och inga verkliga tatueringar gjorda av studion.
+Portfolion, porträtten och loggan ligger i repot. Men **stämningsmaterialet**
+— hero-videon, bläckvideon, bakgrunden bakom tatuerarna och videopanelen i
+kontaktsektionen, plus deras posterbilder — pekar fortfarande på ett CDN som
+hör till verktyget de genererades med. Försvinner det blir hero-videon svart
+utan att någon rört koden.
 
-**Portfoliobilderna** byts i `lib/portfolio.ts` — filen är byggd för just det.
-Lägg studions foton i `public/media/portfolio/` och peka om varje rad:
+Kolla när som helst:
 
-```ts
-{ src: "/media/portfolio/01.jpg", width: 1600, height: 2000,
-  alt: "Kort beskrivning", style: "Fineline", placement: "Underarm" },
+```bash
+npm run build && npm run check-media
 ```
 
-Rutnätet, parallaxen och bildtexterna anpassar sig automatiskt efter hur många
-jobb som ligger i listan. Sätt `PORTFOLIO_IS_REAL_WORK = true` när det är gjort.
+Hämta hem dem så sidan blir självförsörjande:
 
-**Stämningsmaterialet** (hero, studiosektionen, bakgrunden bakom tatueraren)
-byts i `lib/media.ts` — behåll filnamnen i `local`-fälten.
+```bash
+npm run fetch-media
+echo "NEXT_PUBLIC_MEDIA_SOURCE=local" >> .env.local
+npm run build && npm run check-media    # ska nu säga att inget hämtas utifrån
+```
+
+Sätt samma miljövariabel i värdens projektinställningar. **Gör det här innan
+lansering** — det är den enda kvarvarande externa beroendet.
+
+### Portfolio och porträtt
+
+Båda innehåller riktiga foton, beskurna ur studions Instagram. Originalfilerna
+är skarpare — byt när de finns.
+
+- **Portfolion** redigeras i `lib/portfolio.ts`. Lägg filen i
+  `public/media/portfolio/` och lägg till en rad. Rutnätet går från två till
+  tre kolumner av sig självt vid sex jobb.
+- **Porträtten** hör till respektive person i `lib/site.ts` (`portrait`).
+  Saknas ett porträtt renderas ramen tom i stället för att visa fel person.
 
 ---
 
@@ -128,13 +145,42 @@ automatiskt i kontaktsektionen och i den strukturerade datan.
 Allt respekterar `prefers-reduced-motion`: smooth scroll och preloader stängs
 av, och animationer kortas ned till noll.
 
+## Underhåll
+
+```bash
+npm run lint          # tsc --noEmit
+npm run build         # måste vara grön innan push
+npm run check-media   # varnar om sidan hämtar filer utifrån
+npm audit
+```
+
+### Om `npm audit`
+
+`npm audit` rapporterar tre allvarliga sårbarheter i `postcss` och `sharp`.
+Båda ligger **inuti Next.js egna beroenden**, inte bland våra — vår egen
+postcss är redan patchad, och vi kör senaste Next. Den föreslagna åtgärden
+(`npm audit fix --force`) skulle nedgradera Next till version 9 och förstöra
+projektet. Kör den inte.
+
+De är inte heller exploaterbara här: sidan byggs som statisk export, så
+**ingen server kör i produktion**. Både postcss och sharp är byggverktyg som
+bara bearbetar våra egna filer, och sharp anropas aldrig eftersom
+bildoptimeringen är avstängd. De försvinner när Next uppdaterar sina inbakade
+beroenden.
+
+### TypeScript
+
+Låst till version 6. Next.js 16 avvisar TypeScript 7 med
+`does not provide the compiler API required by Next.js`. Uppgradera först när
+Next har stöd för det.
+
 ## Kod
 
 ```
-app/          layout, sida, globals.css, favicon, robots, sitemap
+app/          layout, sida, globals.css, favicon, robots, sitemap, og.jpg
 components/   en fil per sektion + ui/ med animationsprimitiver
-lib/          innehåll, omdömen, mediamanifest
-scripts/      fetch-media.mjs, fetch-google-reviews.mjs
+lib/          innehåll, omdömen, portfolio, mediamanifest
+scripts/      fetch-media, check-media, fetch-google-reviews
 ```
 
 `components/ui/SplitText.tsx` innehåller en viktig detalj: det maskade barnet

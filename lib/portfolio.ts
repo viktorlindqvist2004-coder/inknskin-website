@@ -22,9 +22,6 @@ export type Work = {
   artist: string;
 };
 
-/** Sätt till false om listan någon gång fylls med platshållare igen. */
-export const PORTFOLIO_IS_REAL_WORK = true;
-
 const work = (
   file: string,
   alt: string,

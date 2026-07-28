@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { artists } from "@/lib/site";
-import { images, videos, arashPortrait, nickPortrait } from "@/lib/media";
+import { videos } from "@/lib/media";
 import { MaskUp } from "@/components/ui/SplitText";
 import SectionHead from "@/components/ui/SectionHead";
 import ImageReveal from "@/components/ui/ImageReveal";
@@ -11,20 +11,26 @@ import AutoVideo from "@/components/ui/AutoVideo";
 
 type Artist = (typeof artists)[number];
 
-/**
- * Ett porträtt per tatuerare, i samma ordning som `artists`. De två första är
- * riktiga foton; sista posten är en platshållare om studion växer igen.
- */
-const PORTRAITS: { src: string; alt: string; objectPosition: string }[] = [
-  // Arash foto är nästan kvadratiskt, så en stående ram klipper i sidled.
-  // Beskärningen dras åt höger så huvudet och maskinen ryms.
-  { ...arashPortrait, objectPosition: "92% center" },
-  // Nicks är redan 4:5 och behöver ingen förskjutning.
-  { ...nickPortrait, objectPosition: "center" },
-  { ...images.arm, objectPosition: "center" },
-];
-
 const linkOf = (a: Artist) => ("handleUrl" in a ? a.handleUrl : undefined);
+
+/**
+ * Porträttet kommer från tatueraren själv, så en ny person utan foto får en
+ * tom ram i stället för någon annans ansikte.
+ */
+function Portrait({ artist, className = "" }: { artist: Artist; className?: string }) {
+  if (!artist.portrait) return null;
+  return (
+    /* eslint-disable-next-line @next/next/no-img-element */
+    <img
+      src={artist.portrait}
+      alt={artist.portraitAlt}
+      style={{ objectPosition: artist.portraitPosition }}
+      loading="lazy"
+      decoding="async"
+      className={`h-full w-full object-cover grayscale transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06] group-hover:grayscale-0 ${className}`}
+    />
+  );
+}
 
 /** Namnet breddas via Archivos width-axel när kortet hovras. */
 function Name({ name, className }: { name: string; className: string }) {
@@ -83,19 +89,7 @@ function Solo({ artist }: { artist: Artist }) {
           from="top"
           duration={1.4}
         >
-          {/* Nästan kvadratiskt foto i en stående ram — beskärningen styrs mot
-              höger så att ansiktet och maskinen ryms och den oskarpa armen
-              till vänster är det som faller bort. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={arashPortrait.src}
-            alt={arashPortrait.alt}
-            width={arashPortrait.width}
-            height={arashPortrait.height}
-            loading="lazy"
-            decoding="async"
-            className="h-full w-full object-cover object-[92%_center] grayscale transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06] group-hover:grayscale-0"
-          />
+          <Portrait artist={artist} />
         </ImageReveal>
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
         <span className="absolute left-5 top-5 font-mono text-[0.7rem] tracking-[0.22em] text-gold">
@@ -131,15 +125,7 @@ function Grid({ list }: { list: readonly Artist[] }) {
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: i * 0.12 }}
         >
           <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-ink-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={(PORTRAITS[i] ?? PORTRAITS[0]).src}
-              alt={(PORTRAITS[i] ?? PORTRAITS[0]).alt}
-              style={{ objectPosition: (PORTRAITS[i] ?? PORTRAITS[0]).objectPosition }}
-              loading="lazy"
-              decoding="async"
-              className="h-full w-full object-cover grayscale transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06] group-hover:grayscale-0"
-            />
+            <Portrait artist={a} />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent" />
             <span className="absolute left-5 top-5 font-mono text-[0.7rem] tracking-[0.22em] text-gold">
               0{i + 1}

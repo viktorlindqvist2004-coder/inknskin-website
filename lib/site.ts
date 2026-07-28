@@ -67,6 +67,14 @@ export const hours = {
 /**
  * Lägg till fler objekt här om studion växer — sektionen byter automatiskt
  * från porträttlayout till rutnät när det finns mer än en tatuerare.
+ *
+ * `portrait` hör till tatueraren, inte till en separat lista. Tidigare
+ * matchades bilder mot personer via listposition, vilket innebar att en tredje
+ * tatuerare hade fått Arash ansikte. Saknas porträtt renderas ramen tom i
+ * stället för att visa fel person.
+ *
+ * `portraitPosition` styr beskärningen i den stående ramen — behövs bara när
+ * bilden inte redan är 4:5.
  */
 export const artists = [
   {
@@ -76,6 +84,10 @@ export const artists = [
     handleUrl: "https://www.instagram.com/arash_tattooer/",
     bio: "Startade Ink N Skin på Kungsgatan. Tatuerar allt — från millimeterprecis fineline till massiv blackwork.",
     focus: ["Fineline", "Blackwork", "Lettering", "Cover-up", "Ornamental"],
+    portrait: "/media/arash.jpg",
+    portraitAlt: "Arash koncentrerad över ett pågående jobb i studion",
+    // Nästan kvadratiskt foto i stående ram — dras åt höger så huvudet ryms.
+    portraitPosition: "92% center",
   },
   {
     name: "Nick",
@@ -84,6 +96,9 @@ export const artists = [
     handleUrl: "https://www.instagram.com/nickk_tattooer/",
     bio: "Bygger i färg och realism, med rötterna i old school och japanskt. Stora motiv som tål att byggas över flera sittningar.",
     focus: ["Color work", "Realism", "Old school", "Japanese"],
+    portrait: "/media/nick.jpg",
+    portraitAlt: "Nick, tatuerare på Ink N Skin",
+    portraitPosition: "center",
   },
 ] as const;
 

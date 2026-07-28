@@ -33,11 +33,20 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: "Ink N Skin — Tatueringsstudio i Trollhättan",
     description: site.description,
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Ink N Skin — tatueringsstudio i Trollhättan",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Ink N Skin — Tatueringsstudio i Trollhättan",
     description: site.description,
+    images: ["/og.jpg"],
   },
   robots: { index: true, follow: true },
 };

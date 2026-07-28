@@ -70,40 +70,12 @@ export const images = {
     1536,
     "Svart bläck som sprider sig i vatten mot svart bakgrund",
   ),
-  arm: asset(
-    "hf_20260727_234124_0bc3822e-e91c-43b0-8f27-b19c89bfae6f.png",
-    "blackwork-arm.png",
-    1856,
-    2304,
-    "Underarm med blackwork och ornamental tatuering i hårt sidoljus",
-  ),
   corridor: asset(
     "hf_20260727_234133_33ecb011-c2af-41be-beb8-897cccc18fdc.png",
     "studio-vertical.png",
     1536,
     2752,
     "Mörk studiokorridor med varmt ljus över tatueringsstolen",
-  ),
-  flash: asset(
-    "hf_20260727_234136_3342b752-d14d-431f-9e24-bb3bbf355db1.png",
-    "flash-wall.png",
-    2752,
-    1536,
-    "Vägg täckt av handritade tatueringsskisser i dämpat ljus",
-  ),
-  fineline: asset(
-    "hf_20260727_234138_ba5131c4-a2a7-4c7f-a32b-efa290195da6.png",
-    "fineline.png",
-    1856,
-    2304,
-    "Botanisk fineline-tatuering över nyckelbenet",
-  ),
-  tools: asset(
-    "hf_20260727_234141_3dd635b6-212e-41c2-be0a-8cdc6551f67c.png",
-    "tools-flatlay.png",
-    2048,
-    2048,
-    "Tatueringsmaskin, nålkassetter och bläckkoppar på matt svart stål",
   ),
 } as const;
 
@@ -132,31 +104,8 @@ export const videos = {
   ),
 } as const;
 
-/* Portfoliobilderna bor i lib/portfolio.ts — det är den filen du redigerar
-   för att lägga in studions egna jobb. Bilderna här är stämningsmaterial som
-   används i hero, studiosektionen och bakom tatuerarsektionen. */
-
-/**
- * Riktigt foto på Arash i studion — inte genererat.
- *
- * Ligger alltid i repot under public/, så den går medvetet utanför
- * remote/local-växeln ovan: den ska serveras från egen domän oavsett vad
- * NEXT_PUBLIC_MEDIA_SOURCE står på.
- */
-export const arashPortrait = {
-  src: "/media/arash.jpg",
-  width: 1320,
-  height: 1197,
-  alt: "Arash koncentrerad över ett pågående jobb i studion",
-} as const;
-
-/**
- * Nick, beskuren ur hans Instagram-profilbild. Källan är liten, så bilden är
- * något mjuk — byt gärna mot ett riktigt porträtt när ett finns.
- */
-export const nickPortrait = {
-  src: "/media/nick.jpg",
-  width: 1000,
-  height: 1250,
-  alt: "Nick, tatuerare på Ink N Skin",
-} as const;
+/* Övriga bilder ligger utanför den här filen, eftersom de är riktiga foton som
+   alltid ska serveras från egen domän oavsett remote/local-växeln ovan:
+     · portfolion    → lib/portfolio.ts
+     · tatuerarna    → `portrait` på varje person i lib/site.ts
+     · loggan        → public/media/logo.png via components/ui/Logo.tsx */

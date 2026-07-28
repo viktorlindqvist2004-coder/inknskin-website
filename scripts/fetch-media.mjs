@@ -28,8 +28,10 @@ if (!REMOTE_BASE) {
 }
 
 // Plocka ut alla (fjärrfil, lokalt filnamn)-par ur asset()/video()-anropen.
+// Blankstegen är avsiktligt toleranta: kräver mönstret en radbrytning slutar
+// det matcha så fort någon kör filen genom en formaterare.
 const pairs = [
-  ...manifest.matchAll(/"(hf_[^"]+\.(?:png|jpg|mp4))",\s*\n\s*"([^"]+)"/g),
+  ...manifest.matchAll(/"(hf_[^"]+\.(?:png|jpg|mp4))"\s*,\s*"([^"]+)"/g),
 ].map(([, remote, local]) => ({ remote, local }));
 
 if (pairs.length === 0) {
