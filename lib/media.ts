@@ -135,3 +135,17 @@ export const videos = {
 /* Portfoliobilderna bor i lib/portfolio.ts — det är den filen du redigerar
    för att lägga in studions egna jobb. Bilderna här är stämningsmaterial som
    används i hero, studiosektionen och bakom tatuerarsektionen. */
+
+/**
+ * Riktigt foto på Arash i studion — inte genererat.
+ *
+ * Ligger alltid i repot under public/, så den går medvetet utanför
+ * remote/local-växeln ovan: den ska serveras från egen domän oavsett vad
+ * NEXT_PUBLIC_MEDIA_SOURCE står på.
+ */
+export const arashPortrait = {
+  src: "/media/arash.jpg",
+  width: 1320,
+  height: 1197,
+  alt: "Arash koncentrerad över ett pågående jobb i studion",
+} as const;

@@ -3,14 +3,24 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { artists } from "@/lib/site";
-import { images, videos, type Asset } from "@/lib/media";
+import { images, videos, arashPortrait } from "@/lib/media";
 import { MaskUp } from "@/components/ui/SplitText";
 import SectionHead from "@/components/ui/SectionHead";
 import ImageReveal from "@/components/ui/ImageReveal";
 
 type Artist = (typeof artists)[number];
 
-const PORTRAITS: Asset[] = [images.needle, images.arm, images.fineline];
+/**
+ * Ett porträtt per tatuerare, i samma ordning som `artists`. Först ligger
+ * Arash riktiga foto, så han behåller det oavsett om sektionen renderar
+ * porträttlayouten eller rutnätet. Resten är platshållare tills studion
+ * har foton på fler.
+ */
+const PORTRAITS: { src: string; alt: string }[] = [
+  arashPortrait,
+  images.arm,
+  images.fineline,
+];
 
 const linkOf = (a: Artist) => ("handleUrl" in a ? a.handleUrl : undefined);
 
@@ -71,13 +81,18 @@ function Solo({ artist }: { artist: Artist }) {
           from="top"
           duration={1.4}
         >
+          {/* Nästan kvadratiskt foto i en stående ram — beskärningen styrs mot
+              höger så att ansiktet och maskinen ryms och den oskarpa armen
+              till vänster är det som faller bort. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={PORTRAITS[0].src}
-            alt=""
+            src={arashPortrait.src}
+            alt={arashPortrait.alt}
+            width={arashPortrait.width}
+            height={arashPortrait.height}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover grayscale transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06] group-hover:grayscale-0"
+            className="h-full w-full object-cover object-[92%_center] grayscale transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06] group-hover:grayscale-0"
           />
         </ImageReveal>
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
