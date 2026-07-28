@@ -21,11 +21,13 @@ import { useEffect, useRef } from "react";
  * is never decoding four films at once while you scroll.
  */
 export default function AutoVideo({
-  clip,
+  src,
+  poster,
   className = "",
   style,
 }: {
-  clip: { mp4: string; webm: string; poster: string };
+  src: string;
+  poster?: string;
   className?: string;
   style?: React.CSSProperties;
 }) {
@@ -74,20 +76,18 @@ export default function AutoVideo({
     // amount of correct markup changes that — the block is at the OS level and
     // only lifts once the visitor interacts. Start on the first gesture so the
     // page recovers instead of sitting on a still frame for the whole visit.
+    const gestures = ["pointerdown", "touchstart", "keydown", "scroll"] as const;
     const kick = () => {
       attempt();
-      for (const ev of ["pointerdown", "touchstart", "keydown", "scroll"])
-        window.removeEventListener(ev, kick);
+      for (const ev of gestures) window.removeEventListener(ev, kick);
     };
-    for (const ev of ["pointerdown", "touchstart", "keydown", "scroll"])
-      window.addEventListener(ev, kick, { once: false, passive: true });
+    for (const ev of gestures) window.addEventListener(ev, kick, { passive: true });
 
     return () => {
       el.removeEventListener("loadeddata", attempt);
       el.removeEventListener("canplay", attempt);
       document.removeEventListener("visibilitychange", onVisibility);
-      for (const ev of ["pointerdown", "touchstart", "keydown", "scroll"])
-        window.removeEventListener(ev, kick);
+      for (const ev of gestures) window.removeEventListener(ev, kick);
       io.disconnect();
     };
   }, []);
@@ -97,7 +97,8 @@ export default function AutoVideo({
       ref={ref}
       className={className}
       style={style}
-      poster={clip.poster}
+      src={src}
+      poster={poster}
       autoPlay
       muted
       loop
@@ -108,11 +109,6 @@ export default function AutoVideo({
       preload="metadata"
       tabIndex={-1}
       aria-hidden
-    >
-      {/* H.264 först — det är den enda kodeken Safari/iOS spelar. WebM finns
-          som reserv för byggen utan patentbelagda kodekar. */}
-      <source src={clip.mp4} type="video/mp4" />
-      <source src={clip.webm} type="video/webm" />
-    </video>
+    />
   );
 }

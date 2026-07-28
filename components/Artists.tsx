@@ -180,7 +180,8 @@ export default function Artists() {
           decoding="async"
         />
         <AutoVideo
-          clip={videos.needle}
+          src={videos.needle.src}
+          poster={videos.needle.poster}
           className="hidden h-[116%] w-full object-cover md:block"
         />
       </motion.div>

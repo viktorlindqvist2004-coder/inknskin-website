@@ -40,7 +40,8 @@ export default function Hero() {
         style={{ y: mediaY, scale: mediaScale }}
       >
         <AutoVideo
-          clip={videos.hero}
+          src={videos.hero.src}
+          poster={videos.hero.poster}
           className="h-full w-full object-cover"
         />
       </motion.div>
