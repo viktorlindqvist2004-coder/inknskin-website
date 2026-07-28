@@ -10,6 +10,8 @@ export const site = {
   legalName: "Ink n Skin tatuering studio Trollhättan",
   tagline: "Tatueringsstudio i Trollhättan",
   city: "Trollhättan",
+  /** Grundningsår, står på studions emblem. */
+  est: 2023,
   url: "https://inknskintattoo.se",
   description:
     "Tatueringsstudio mitt i Trollhättan. Custom design, fineline, blackwork och cover-up av Arash på Kungsgatan 16B.",

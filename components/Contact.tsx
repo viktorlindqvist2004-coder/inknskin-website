@@ -8,6 +8,8 @@ import { MaskUp } from "@/components/ui/SplitText";
 import Magnetic from "@/components/ui/Magnetic";
 import SectionHead from "@/components/ui/SectionHead";
 import ImageReveal from "@/components/ui/ImageReveal";
+import AutoVideo from "@/components/ui/AutoVideo";
+import Logo from "@/components/ui/Logo";
 
 export default function Contact() {
   const ref = useRef<HTMLElement>(null);
@@ -41,7 +43,7 @@ export default function Contact() {
                 data-cursor="DM"
                 className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-bone px-9 py-5 text-ink"
               >
-                <span className="absolute inset-0 translate-y-full bg-ember transition-transform duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0" />
+                <span className="absolute inset-0 translate-y-full bg-gold transition-transform duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0" />
                 <span className="relative z-10 text-[0.78rem] font-semibold uppercase tracking-[0.18em]">
                   DM på Instagram
                 </span>
@@ -83,7 +85,7 @@ export default function Contact() {
                   href={contact.instagram}
                   target="_blank"
                   rel="noreferrer"
-                  className="w-fit text-bone transition-colors hover:text-ember"
+                  className="w-fit text-bone transition-colors hover:text-gold"
                 >
                   Instagram {contact.instagramHandle}
                 </a>
@@ -91,17 +93,17 @@ export default function Contact() {
                   href={contact.tiktok}
                   target="_blank"
                   rel="noreferrer"
-                  className="w-fit text-bone transition-colors hover:text-ember"
+                  className="w-fit text-bone transition-colors hover:text-gold"
                 >
                   TikTok {contact.tiktokHandle}
                 </a>
                 {contact.phone ? (
-                  <a href={`tel:${contact.phone.replace(/\s/g, "")}`} className="w-fit text-bone hover:text-ember">
+                  <a href={`tel:${contact.phone.replace(/\s/g, "")}`} className="w-fit text-bone hover:text-gold">
                     {contact.phone}
                   </a>
                 ) : null}
                 {contact.email ? (
-                  <a href={`mailto:${contact.email}`} className="w-fit text-bone hover:text-ember">
+                  <a href={`mailto:${contact.email}`} className="w-fit text-bone hover:text-gold">
                     {contact.email}
                   </a>
                 ) : null}
@@ -142,26 +144,23 @@ export default function Contact() {
             from="top"
             duration={1.4}
           >
-            <motion.video
-              className="h-[118%] w-full object-cover"
-              style={{ y: videoY }}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
-              poster={videos.heroVertical.poster}
-              aria-hidden
-            >
-              <source src={videos.heroVertical.src} type="video/mp4" />
-            </motion.video>
+            <motion.div className="h-[118%] w-full" style={{ y: videoY }}>
+              <AutoVideo
+                src={videos.heroVertical.src}
+                poster={videos.heroVertical.poster}
+                className="h-full w-full object-cover"
+              />
+            </motion.div>
           </ImageReveal>
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-ink/30" />
-          <div className="absolute inset-x-6 bottom-6">
-            <span className="eyebrow">Kungsgatan 16B</span>
-            <p className="display mt-2 text-[1.6rem] leading-none text-bone">
-              Trollhättan
-            </p>
+          <div className="absolute inset-x-6 bottom-6 flex items-end justify-between gap-4">
+            <div>
+              <span className="eyebrow">Kungsgatan 16B</span>
+              <p className="display mt-2 text-[1.6rem] leading-none text-bone">
+                Trollhättan
+              </p>
+            </div>
+            <Logo size={64} className="mb-1 opacity-90" />
           </div>
         </div>
       </div>

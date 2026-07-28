@@ -1,6 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
+import Logo from "@/components/ui/Logo";
+import { site } from "@/lib/site";
 import { useEffect, useState } from "react";
 
 const WORDS = ["INK", "N", "SKIN"];
@@ -59,10 +61,19 @@ export default function Preloader() {
         >
           <div className="flex items-start justify-between">
             <span className="eyebrow">Trollhättan · Sverige</span>
-            <span className="eyebrow">Est. Kungsgatan 16B</span>
+            <span className="eyebrow">Kungsgatan 16B</span>
           </div>
 
           <div className="flex flex-col items-start">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.72, rotate: -22 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
+              className="mb-7"
+            >
+              <Logo size={92} priority />
+            </motion.div>
+
             {WORDS.map((w, i) => (
               <span key={w} className="block overflow-hidden">
                 <motion.span
@@ -82,16 +93,16 @@ export default function Preloader() {
           </div>
 
           <div className="flex items-end justify-between">
-            <span className="eyebrow">Laddar studion</span>
+            <span className="eyebrow">Est. {site.est}</span>
             <span className="display text-[clamp(2.5rem,9vw,7rem)] leading-none text-bone tabular-nums">
               {pct}
-              <span className="text-ember">%</span>
+              <span className="text-gold">%</span>
             </span>
           </div>
 
           {/* progress hairline */}
           <motion.div
-            className="absolute bottom-0 left-0 h-px bg-ember"
+            className="absolute bottom-0 left-0 h-px bg-gold"
             initial={{ width: "0%" }}
             animate={{ width: `${pct}%` }}
             transition={{ ease: "linear", duration: 0.1 }}

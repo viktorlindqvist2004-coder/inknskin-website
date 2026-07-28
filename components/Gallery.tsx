@@ -64,7 +64,7 @@ function Tile({
         viewport={{ once: true, amount: 0.6 }}
         transition={{ duration: 0.9, ease: EASE, delay: 0.25 + (index % 3) * 0.09 }}
       >
-        <span className="text-[0.72rem] uppercase tracking-[0.16em] text-bone transition-colors duration-500 group-hover:text-ember">
+        <span className="text-[0.72rem] uppercase tracking-[0.16em] text-bone transition-colors duration-500 group-hover:text-gold">
           {work.style}
         </span>
         <span className="h-px flex-1 bg-bone/12" aria-hidden />

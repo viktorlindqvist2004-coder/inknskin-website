@@ -4,19 +4,24 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 
 /**
- * Lenis drives the page scroll and feeds motion's rAF loop, so every
- * scroll-linked transform in the site is interpolated on the same clock.
- * Disabled entirely when the visitor prefers reduced motion.
+ * Lenis refines mouse-wheel scrolling and feeds motion's rAF loop, so every
+ * scroll-linked transform is interpolated on the same clock.
+ *
+ * Deliberately NOT used on touch devices. Phones already have momentum
+ * scrolling tuned to the hardware; running Lenis on top of it competes with
+ * that rather than improving it, and the result reads as stutter. Native
+ * scrolling on touch, Lenis on pointer devices.
+ *
+ * Also skipped entirely for reduced-motion visitors.
  */
 export default function SmoothScroll() {
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const lenis = new Lenis({
       duration: 1.15,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 1.6,
       wheelMultiplier: 0.95,
     });
 

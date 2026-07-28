@@ -4,14 +4,21 @@
 @import "@fontsource-variable/inter/index.css";
 
 @theme {
-  --color-ink: #060506;
-  --color-ink-2: #0b0a0b;
-  --color-ink-3: #131113;
+  /* Ink stays near-black, but warmed slightly so the gold sits in the same
+     family instead of floating on a cold grey. */
+  --color-ink: #070604;
+  --color-ink-2: #0d0b08;
+  --color-ink-3: #16130e;
   --color-bone: #ece7e0;
   --color-bone-dim: #a49c93;
   --color-muted: #6f6862;
-  --color-ember: #ff3b1f;
-  --color-ember-deep: #b81f0c;
+
+  /* Sampled off the studio's emblem: mean #aa7e0a, highlights #c8910c.
+     `gold` is lifted a touch from the mean so it holds contrast as small
+     uppercase text on the near-black background. */
+  --color-gold: #d2a02a;
+  --color-gold-lite: #e8c766;
+  --color-gold-deep: #8a6a12;
 
   --font-display: "Archivo Variable", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-sans: "Inter Variable", "Inter", system-ui, -apple-system, sans-serif;
@@ -56,12 +63,12 @@
   }
 
   ::selection {
-    background: var(--color-ember);
+    background: var(--color-gold);
     color: var(--color-ink);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-ember);
+    outline: 2px solid var(--color-gold);
     outline-offset: 3px;
   }
 }
@@ -114,17 +121,29 @@
   );
 }
 
-/* ---- Film grain: a single animated SVG-noise layer over the whole page ---- */
+/* ---- Film grain: a single SVG-noise layer over the whole page ----
+   The layer is inset by just over the animation's travel (3%). It used to be
+   -150%, i.e. a composited surface four viewports wide in each direction,
+   repainted every 200ms — a serious drain on phones for an effect at 4.8%
+   opacity. */
 .grain::after {
   content: "";
   position: fixed;
-  inset: -150%;
+  inset: -8%;
   z-index: 60;
   pointer-events: none;
   opacity: 0.048;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: grain-shift 0.6s steps(3) infinite;
-  will-change: transform;
+}
+
+/* Only animate the grain where there is a pointer — on touch it is a constant
+   full-screen repaint competing with scrolling, and the shimmer is invisible
+   at this opacity on a phone anyway. */
+@media (pointer: fine) {
+  .grain::after {
+    animation: grain-shift 0.6s steps(3) infinite;
+    will-change: transform;
+  }
 }
 
 @keyframes grain-shift {

@@ -26,10 +26,10 @@ export default function Services() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: i * 0.05 }}
             >
               {/* Ember wipe fills the row from the left on hover */}
-              <span className="pointer-events-none absolute inset-0 -z-10 origin-left scale-x-0 bg-ember/8 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+              <span className="pointer-events-none absolute inset-0 -z-10 origin-left scale-x-0 bg-gold/8 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
 
               <div className="flex flex-col gap-3 py-7 md:flex-row md:items-baseline md:gap-10">
-                <span className="font-mono text-[0.7rem] tracking-[0.2em] text-muted transition-colors duration-500 group-hover:text-ember md:w-14">
+                <span className="font-mono text-[0.7rem] tracking-[0.2em] text-muted transition-colors duration-500 group-hover:text-gold md:w-14">
                   {s.n}
                 </span>
 

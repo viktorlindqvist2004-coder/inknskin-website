@@ -35,7 +35,7 @@ export default function Process() {
           </p>
 
           <div className="mt-10 flex items-center gap-4">
-            <motion.span className="display text-[3.5rem] leading-none text-ember tabular-nums">
+            <motion.span className="display text-[3.5rem] leading-none text-gold tabular-nums">
               <StepNumber value={counterIndex} />
             </motion.span>
             <span className="text-[0.7rem] uppercase tracking-[0.18em] text-muted">
@@ -48,7 +48,7 @@ export default function Process() {
         <ol className="relative pl-8 md:pl-12">
           <span className="absolute left-0 top-2 h-[calc(100%-1rem)] w-px bg-bone/12" aria-hidden />
           <motion.span
-            className="absolute left-0 top-2 h-[calc(100%-1rem)] w-px origin-top bg-ember"
+            className="absolute left-0 top-2 h-[calc(100%-1rem)] w-px origin-top bg-gold"
             style={{ scaleY: lineScale }}
             aria-hidden
           />
@@ -63,7 +63,7 @@ export default function Process() {
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
               <motion.span
-                className="absolute -left-8 top-2 h-2 w-2 -translate-x-1/2 rounded-full bg-ember md:-left-12"
+                className="absolute -left-8 top-2 h-2 w-2 -translate-x-1/2 rounded-full bg-gold md:-left-12"
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true, amount: 0.5 }}

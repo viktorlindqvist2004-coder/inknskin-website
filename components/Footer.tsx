@@ -1,32 +1,34 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { motion } from "motion/react";
 import { contact, site } from "@/lib/site";
+import Logo from "@/components/ui/Logo";
 
 export default function Footer() {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end end"],
-  });
-
-  // The wordmark rises and settles as the last of the page arrives.
-  const y = useTransform(scrollYProgress, [0, 1], ["22%", "0%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [0.25, 1]);
-
+  // The wordmark reveal is whileInView rather than scroll-linked. A
+  // scroll-linked progress on the last element of the page never completes:
+  // there is no scroll left once the footer is on screen, so it stayed parked
+  // at its start values — 25% opacity and 22% off position.
   const year = new Date().getFullYear();
 
   return (
-    <footer ref={ref} className="relative overflow-hidden border-t border-bone/10 pt-16">
+    <footer className="relative overflow-hidden border-t border-bone/10 pt-16">
       <div className="edge flex flex-col gap-10 pb-14 md:flex-row md:justify-between">
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, rotate: -14 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <Logo size={76} />
+          </motion.div>
           <span className="eyebrow">Studion</span>
           <a
             href={contact.mapsUrl}
             target="_blank"
             rel="noreferrer"
-            className="text-[0.92rem] leading-relaxed text-bone transition-colors hover:text-ember"
+            className="text-[0.92rem] leading-relaxed text-bone transition-colors hover:text-gold"
           >
             {contact.street}
             <br />
@@ -40,7 +42,7 @@ export default function Footer() {
             href={contact.instagram}
             target="_blank"
             rel="noreferrer"
-            className="text-[0.92rem] text-bone transition-colors hover:text-ember"
+            className="text-[0.92rem] text-bone transition-colors hover:text-gold"
           >
             Instagram {contact.instagramHandle}
           </a>
@@ -48,7 +50,7 @@ export default function Footer() {
             href={contact.tiktok}
             target="_blank"
             rel="noreferrer"
-            className="text-[0.92rem] text-bone transition-colors hover:text-ember"
+            className="text-[0.92rem] text-bone transition-colors hover:text-gold"
           >
             TikTok {contact.tiktokHandle}
           </a>
@@ -73,20 +75,31 @@ export default function Footer() {
         </a>
       </div>
 
-      {/* Oversized wordmark bleeding off the bottom edge */}
+      {/* Oversized wordmark bleeding off the bottom edge.
+          Grey fill with a hairline outline in the emblem's gold. The type is
+          held on one line — at 19vw it wrapped to "INKN / SKIN". */}
       <motion.div
         className="edge select-none"
-        style={{ y, opacity }}
+        initial={{ opacity: 0, y: "18%" }}
+        whileInView={{ opacity: 1, y: "0%" }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
         aria-hidden
       >
-        <span className="display block w-full text-center text-[clamp(3.5rem,19vw,17rem)] leading-[0.8] tracking-[-0.05em] text-bone/90">
+        <span
+          className="display block w-full whitespace-nowrap text-center text-[clamp(2rem,13vw,12rem)] leading-[0.85] tracking-[-0.04em] text-[#35312b]"
+          style={{
+            WebkitTextStrokeWidth: "1.5px",
+            WebkitTextStrokeColor: "var(--color-gold)",
+          }}
+        >
           INK N SKIN
         </span>
       </motion.div>
 
       <div className="edge flex flex-col gap-2 border-t border-bone/10 py-6 text-[0.72rem] text-muted md:flex-row md:items-center md:justify-between">
         <span>
-          © {year} {site.legalName}
+          © {year} {site.legalName} · Est. {site.est}
         </span>
         <span>Tatueringsstudio i Trollhättan · 18 år och giltig legitimation krävs</span>
       </div>

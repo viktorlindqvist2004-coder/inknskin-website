@@ -43,12 +43,12 @@ export default function Faq() {
                   {/* Plus that rotates into a minus */}
                   <span className="relative mt-1.5 block h-3.5 w-3.5 shrink-0">
                     <motion.span
-                      className="absolute left-0 top-1/2 block h-px w-full bg-ember"
+                      className="absolute left-0 top-1/2 block h-px w-full bg-gold"
                       animate={{ rotate: isOpen ? 180 : 0 }}
                       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     />
                     <motion.span
-                      className="absolute left-1/2 top-0 block h-full w-px bg-ember"
+                      className="absolute left-1/2 top-0 block h-full w-px bg-gold"
                       animate={{ rotate: isOpen ? 90 : 0, opacity: isOpen ? 0 : 1 }}
                       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     />

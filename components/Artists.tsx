@@ -7,6 +7,7 @@ import { images, videos, arashPortrait } from "@/lib/media";
 import { MaskUp } from "@/components/ui/SplitText";
 import SectionHead from "@/components/ui/SectionHead";
 import ImageReveal from "@/components/ui/ImageReveal";
+import AutoVideo from "@/components/ui/AutoVideo";
 
 type Artist = (typeof artists)[number];
 
@@ -56,7 +57,7 @@ function FocusTags({ artist }: { artist: Artist }) {
           target="_blank"
           rel="noreferrer"
           data-cursor="Instagram"
-          className="rounded-full border border-ember/40 px-3.5 py-1.5 text-[0.68rem] uppercase tracking-[0.14em] text-ember transition-colors hover:bg-ember hover:text-ink"
+          className="rounded-full border border-gold/40 px-3.5 py-1.5 text-[0.68rem] uppercase tracking-[0.14em] text-gold transition-colors hover:bg-gold hover:text-ink"
         >
           {artist.handle}
         </a>
@@ -102,7 +103,7 @@ function Solo({ artist }: { artist: Artist }) {
       </div>
 
       <div>
-        <p className="text-[0.72rem] uppercase tracking-[0.2em] text-ember">
+        <p className="text-[0.72rem] uppercase tracking-[0.2em] text-gold">
           {artist.role}
         </p>
         <Name name={artist.name} className="mt-3 t-lg text-bone" />
@@ -143,7 +144,7 @@ function Grid({ list }: { list: readonly Artist[] }) {
             </span>
             <div className="absolute inset-x-5 bottom-5">
               <Name name={a.name} className="text-[clamp(2.2rem,5.4vw,3.8rem)] text-bone" />
-              <p className="mt-1 text-[0.72rem] uppercase tracking-[0.2em] text-ember">
+              <p className="mt-1 text-[0.72rem] uppercase tracking-[0.2em] text-gold">
                 {a.role}
               </p>
             </div>
@@ -175,19 +176,23 @@ export default function Artists() {
       id="tatuerare"
       className="relative overflow-hidden py-[clamp(5rem,12vh,9rem)]"
     >
-      {/* Barely-there footage wash behind the whole section */}
+      {/* Barely-there footage wash behind the whole section. It sits at 13%
+          opacity, so on phones the still poster is indistinguishable from the
+          film — not worth a fourth simultaneous video decode. */}
       <motion.div className="absolute inset-0 -z-10 opacity-[0.13]" style={{ y: bgY }} aria-hidden>
-        <video
-          className="h-[116%] w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={videos.needle.poster}
+          alt=""
+          className="h-[116%] w-full object-cover md:hidden"
+          loading="lazy"
+          decoding="async"
+        />
+        <AutoVideo
+          src={videos.needle.src}
           poster={videos.needle.poster}
-        >
-          <source src={videos.needle.src} type="video/mp4" />
-        </video>
+          className="hidden h-[116%] w-full object-cover md:block"
+        />
       </motion.div>
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink via-ink/80 to-ink" aria-hidden />
 

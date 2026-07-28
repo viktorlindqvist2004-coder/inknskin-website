@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/
 import { useState } from "react";
 import { contact, nav } from "@/lib/site";
 import Magnetic from "@/components/ui/Magnetic";
+import Logo from "@/components/ui/Logo";
 
 export default function Nav() {
   const { scrollY } = useScroll();
@@ -28,15 +29,16 @@ export default function Nav() {
         <div
           className={`edge flex items-center justify-between py-5 transition-colors duration-500 ${
             solid
-              ? "border-b border-bone/10 bg-ink/70 backdrop-blur-xl"
+              ? "border-b border-bone/10 bg-ink/92 md:bg-ink/70 md:backdrop-blur-xl"
               : "border-b border-transparent"
           }`}
         >
           <a href="#top" className="group flex items-center gap-3" aria-label="Ink N Skin, till toppen">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ember opacity-60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-ember" />
-            </span>
+            <Logo
+              size={38}
+              priority
+              className="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:rotate-[18deg]"
+            />
             <span className="display text-[0.95rem] tracking-[0.02em] text-bone">
               Ink N Skin
             </span>
@@ -50,7 +52,7 @@ export default function Nav() {
                 className="group relative text-[0.78rem] font-medium uppercase tracking-[0.16em] text-bone-dim transition-colors hover:text-bone"
               >
                 {item.label}
-                <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-ember transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-full" />
+                <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-gold transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-full" />
               </a>
             ))}
           </nav>
@@ -62,7 +64,7 @@ export default function Nav() {
                 data-cursor="Boka"
                 className="group relative inline-flex items-center overflow-hidden rounded-full border border-bone/25 px-6 py-2.5 text-[0.72rem] font-medium uppercase tracking-[0.18em] text-bone"
               >
-                <span className="absolute inset-0 -z-0 translate-y-full bg-ember transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0" />
+                <span className="absolute inset-0 -z-0 translate-y-full bg-gold transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0" />
                 <span className="relative z-10 transition-colors duration-300 group-hover:text-ink">
                   Boka tid
                 </span>

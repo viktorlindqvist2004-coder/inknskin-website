@@ -22,7 +22,7 @@ export default function Ticker() {
             <span className="display px-7 text-[clamp(1.1rem,2.4vw,2rem)] text-bone/85">
               {item}
             </span>
-            <span className="h-1.5 w-1.5 rotate-45 bg-ember" aria-hidden />
+            <span className="h-1.5 w-1.5 rotate-45 bg-gold" aria-hidden />
           </span>
         ))}
       </Marquee>

@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { videos } from "@/lib/media";
 import Counter from "@/components/ui/Counter";
 import SectionHead from "@/components/ui/SectionHead";
+import AutoVideo from "@/components/ui/AutoVideo";
 
 const COPY =
   "Vi tatuerar inte motiv. Vi bygger något som ska sitta på dig resten av livet.";
@@ -69,19 +70,16 @@ export default function Intro() {
           ref={inkRef}
           className="relative aspect-[16/10] overflow-hidden rounded-sm bg-ink-2"
         >
-          <motion.video
-            className="h-[124%] w-full -translate-y-[10%] object-cover opacity-90"
+          <motion.div
+            className="h-[124%] w-full -translate-y-[10%]"
             style={{ y: inkY, scale: inkScale }}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="none"
-            poster={videos.ink.poster}
-            aria-hidden
           >
-            <source src={videos.ink.src} type="video/mp4" />
-          </motion.video>
+            <AutoVideo
+              src={videos.ink.src}
+              poster={videos.ink.poster}
+              className="h-full w-full object-cover opacity-90"
+            />
+          </motion.div>
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-ink/30" />
         </div>
 

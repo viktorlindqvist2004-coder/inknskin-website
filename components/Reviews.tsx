@@ -16,8 +16,8 @@ function Stars({ n }: { n: number }) {
         <svg key={i} width="13" height="13" viewBox="0 0 24 24" aria-hidden>
           <path
             d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"
-            fill={i < n ? "var(--color-ember)" : "transparent"}
-            stroke="var(--color-ember)"
+            fill={i < n ? "var(--color-gold)" : "transparent"}
+            stroke="var(--color-gold)"
             strokeWidth="1.3"
             strokeLinejoin="round"
           />
@@ -29,7 +29,7 @@ function Stars({ n }: { n: number }) {
 
 function Card({ review, skew }: { review: Review; skew: MotionValue<number> }) {
   return (
-    <motion.article style={{ skewY: skew }} className="mx-3 flex w-[clamp(19rem,29vw,26rem)] shrink-0 flex-col justify-between gap-6 rounded-sm border border-bone/12 bg-ink-2/70 p-7 backdrop-blur-sm transition-colors duration-500 hover:border-bone/25">
+    <motion.article style={{ skewY: skew }} className="mx-3 flex w-[clamp(19rem,29vw,26rem)] shrink-0 flex-col justify-between gap-6 rounded-sm border border-bone/12 bg-ink-2/80 p-7 md:backdrop-blur-sm transition-colors duration-500 hover:border-bone/25">
       <Stars n={review.rating} />
       <p className="text-[0.95rem] leading-relaxed text-bone/85">“{review.body}”</p>
       <footer className="flex items-end justify-between gap-4 border-t border-bone/10 pt-4">
@@ -94,11 +94,11 @@ export default function Reviews() {
         </div>
 
         {process.env.NODE_ENV !== "production" && !REVIEWS_VERIFIED ? (
-          <p className="mt-8 rounded-sm border border-ember/40 bg-ember/10 px-4 py-3 text-[0.8rem] text-bone">
+          <p className="mt-8 rounded-sm border border-gold/40 bg-gold/10 px-4 py-3 text-[0.8rem] text-bone">
             <strong>Endast synligt i utvecklingsläge:</strong> omdömena nedan är
             platshållare. Ersätt dem med riktiga omdömen i{" "}
-            <code className="text-ember">lib/reviews.ts</code> innan sidan
-            lanseras, och sätt <code className="text-ember">REVIEWS_VERIFIED</code>{" "}
+            <code className="text-gold">lib/reviews.ts</code> innan sidan
+            lanseras, och sätt <code className="text-gold">REVIEWS_VERIFIED</code>{" "}
             till true.
           </p>
         ) : null}
@@ -126,7 +126,7 @@ export default function Reviews() {
           href={contact.mapsUrl}
           target="_blank"
           rel="noreferrer"
-          className="text-[0.75rem] uppercase tracking-[0.18em] text-bone-dim underline-offset-8 transition-colors hover:text-ember hover:underline"
+          className="text-[0.75rem] uppercase tracking-[0.18em] text-bone-dim underline-offset-8 transition-colors hover:text-gold hover:underline"
         >
           Läs alla omdömen på Google
         </a>

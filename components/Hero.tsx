@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import { useRef } from "react";
 import { videos } from "@/lib/media";
 import { contact } from "@/lib/site";
+import AutoVideo from "@/components/ui/AutoVideo";
 
 const LINES = ["INK", "N SKIN"];
 
@@ -38,18 +39,11 @@ export default function Hero() {
         className="absolute inset-0 -z-10"
         style={{ y: mediaY, scale: mediaScale }}
       >
-        <video
-          className="h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
+        <AutoVideo
+          src={videos.hero.src}
           poster={videos.hero.poster}
-          aria-hidden
-        >
-          <source src={videos.hero.src} type="video/mp4" />
-        </video>
+          className="h-full w-full object-cover"
+        />
       </motion.div>
 
       <motion.div
@@ -83,7 +77,7 @@ export default function Hero() {
                 {lineText}
                 {li === LINES.length - 1 && (
                   <motion.span
-                    className="ml-[0.12em] inline-block h-[0.13em] w-[0.13em] rounded-full bg-ember align-baseline"
+                    className="ml-[0.12em] inline-block h-[0.13em] w-[0.13em] rounded-full bg-gold align-baseline"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 2.4, type: "spring", stiffness: 260, damping: 14 }}
@@ -113,7 +107,7 @@ export default function Hero() {
                 target="_blank"
                 rel="noreferrer"
                 data-cursor="Karta"
-                className="text-sm text-bone transition-colors hover:text-ember"
+                className="text-sm text-bone transition-colors hover:text-gold"
               >
                 {contact.street}
                 <br />
@@ -143,7 +137,7 @@ export default function Hero() {
         <span className="eyebrow text-[0.6rem]">Scrolla</span>
         <span className="relative block h-10 w-px overflow-hidden bg-bone/20">
           <motion.span
-            className="absolute inset-x-0 top-0 block h-4 bg-ember"
+            className="absolute inset-x-0 top-0 block h-4 bg-gold"
             animate={{ y: ["-100%", "260%"] }}
             transition={{ duration: 1.9, repeat: Infinity, ease: "easeInOut" }}
           />
