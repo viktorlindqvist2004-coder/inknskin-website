@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { artists } from "@/lib/site";
 import { images, videos, type Asset } from "@/lib/media";
 import { MaskUp } from "@/components/ui/SplitText";
+import SectionHead from "@/components/ui/SectionHead";
 
 type Artist = (typeof artists)[number];
 
@@ -175,10 +176,7 @@ export default function Artists() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink via-ink/80 to-ink" aria-hidden />
 
       <div className="edge">
-        <div className="flex items-baseline gap-4">
-          <span className="eyebrow">04 — {solo ? "Tatueraren" : "Tatuerare"}</span>
-          <span className="hairline flex-1" />
-        </div>
+        <SectionHead index="04" label={solo ? "Tatueraren" : "Tatuerare"} />
 
         <div className="mt-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <MaskUp>
@@ -186,8 +184,8 @@ export default function Artists() {
           </MaskUp>
           <p className="max-w-sm pb-3 text-[0.93rem] leading-relaxed text-bone-dim">
             {solo
-              ? "En tatuerare, ett rum, samma hand från skiss till sista linjen. Säg vad du vill ha så är vi raka med vad som går att göra."
-              : "Säg vad du vill ha så säger vi vem av oss som passar bäst för jobbet."}
+              ? "En tatuerare, samma hand från skiss till sista linjen."
+              : "Säg vad du vill ha så säger vi vem som passar bäst."}
           </p>
         </div>
 

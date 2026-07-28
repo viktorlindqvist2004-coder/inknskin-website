@@ -4,16 +4,14 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { faq } from "@/lib/site";
 import { MaskUp } from "@/components/ui/SplitText";
+import SectionHead from "@/components/ui/SectionHead";
 
 export default function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
     <section id="faq" className="edge relative py-[clamp(5rem,12vh,9rem)]">
-      <div className="flex items-baseline gap-4">
-        <span className="eyebrow">07 — Vanliga frågor</span>
-        <span className="hairline flex-1" />
-      </div>
+      <SectionHead index="07" label="Vanliga frågor" />
 
       <div className="mt-12 grid gap-12 md:grid-cols-[0.7fr_1.3fr] md:gap-20">
         <MaskUp className="md:sticky md:top-32 md:h-fit md:self-start">

@@ -12,7 +12,7 @@ export const site = {
   city: "Trollhättan",
   url: "https://inknskintattoo.se",
   description:
-    "Ink N Skin är en tatueringsstudio mitt i Trollhättan. Custom design, fineline, blackwork och cover-up av Arash — tatuerare med lång erfarenhet av alla stilar och motiv.",
+    "Tatueringsstudio mitt i Trollhättan. Custom design, fineline, blackwork och cover-up av Arash på Kungsgatan 16B.",
 } as const;
 
 type Contact = {
@@ -69,7 +69,7 @@ export const artists = [
     role: "Tatuerare & grundare",
     handle: "@arash_tattooer",
     handleUrl: "https://www.instagram.com/arash_tattooer/",
-    bio: "Startade Ink N Skin på Kungsgatan och tatuerar allt som går in genom dörren. Från millimeterprecis fineline och lettering till massiv blackwork och täckande cover-ups som ska bära ett helt liv.",
+    bio: "Startade Ink N Skin på Kungsgatan. Tatuerar allt — från millimeterprecis fineline till massiv blackwork.",
     focus: ["Fineline", "Blackwork", "Lettering", "Cover-up", "Ornamental"],
   },
 ] as const;
@@ -78,32 +78,32 @@ export const services = [
   {
     n: "01",
     title: "Custom design",
-    body: "Vi ritar ditt motiv från grunden efter din idé, din kropp och din placering. Skissen görs om tills den sitter — du ser den innan nålen möter hud.",
+    body: "Ritat från grunden efter din idé. Du ser skissen innan nålen möter hud.",
   },
   {
     n: "02",
     title: "Fineline",
-    body: "Tunna, exakta linjer med långsiktig läsbarhet. Botaniskt, ornamentalt eller minimalt — utfört så att det står sig när bläcket lagt sig.",
+    body: "Tunna, exakta linjer som håller när bläcket lagt sig.",
   },
   {
     n: "03",
     title: "Blackwork",
-    body: "Massiv svärta, hård kontrast och grafisk form. Från enskilda statement-motiv till uppbyggnad av hela armar och ryggar över flera sittningar.",
+    body: "Massiv svärta och grafisk form. Enskilda motiv eller hela armar.",
   },
   {
     n: "04",
     title: "Cover-up",
-    body: "Gammalt som ska bort? Vi bygger ett nytt motiv ovanpå det gamla i stället för att dölja det. Kom in för bedömning — vi är raka med vad som är möjligt.",
+    body: "Nytt motiv ovanpå det gamla. Kom in så säger vi rakt vad som går.",
   },
   {
     n: "05",
-    title: "Lettering & script",
-    body: "Text som faktiskt går att läsa om trettio år. Bokstavsformer, spacing och placering anpassas efter kroppsdelen — inte tvärtom.",
+    title: "Lettering",
+    body: "Text som går att läsa om trettio år.",
   },
   {
     n: "06",
     title: "Retusch",
-    body: "Uppfräschning av linjer, fyllning och kontrast på äldre tatueringar. Även arbeten gjorda någon annanstans, efter genomgång i studion.",
+    body: "Uppfräschning av linjer och kontrast. Även andras jobb.",
   },
 ] as const;
 
@@ -111,49 +111,49 @@ export const process = [
   {
     n: "01",
     title: "Hör av dig",
-    body: "Skicka en DM på Instagram eller kom förbi studion under bemannad tid. Berätta motiv, ungefärlig storlek och var på kroppen det ska sitta — gärna med referensbilder.",
+    body: "DM med motiv, storlek och placering. Gärna referensbilder.",
   },
   {
     n: "02",
     title: "Konsultation",
-    body: "Vi går igenom idén tillsammans, känner på placering och storlek, och är ärliga om vad som håller över tid. Du får pris och tidsuppskattning innan något bokas.",
+    body: "Vi går igenom idén och du får pris innan något bokas.",
   },
   {
     n: "03",
-    title: "Skiss & bokning",
-    body: "Motivet ritas fram och justeras tills du är nöjd. Tid bokas — även utanför bemannade tider — och du får en tydlig förberedelselista inför sittningen.",
+    title: "Skiss",
+    body: "Motivet ritas fram och justeras tills du är nöjd.",
   },
   {
     n: "04",
     title: "Sittning",
-    body: "Steril engångsutrustning, ny nål och rent arbetsbord varje gång. Vi tar pauser när du behöver. Efteråt får du eftervård och en genomgång av läkningen.",
+    body: "Steril utrustning, pauser när du behöver, eftervård med dig hem.",
   },
 ] as const;
 
 export const faq = [
   {
     q: "Hur bokar jag tid?",
-    a: "Enklast via DM på Instagram @inknskintattoo, eller genom att komma förbi studion på Kungsgatan 16B under bemannad tid, måndag till fredag 12:00–16:30. Tider utanför det går att boka — hör bara av dig.",
+    a: "DM på Instagram @inknskintattoo, eller kom förbi Kungsgatan 16B mån–fre 12:00–16:30. Andra tider går också att boka.",
   },
   {
-    q: "Vad kostar en tatuering?",
-    a: "Priset beror på storlek, detaljnivå, placering och hur många sittningar motivet kräver. Vi ger alltid en tydlig uppskattning vid konsultationen, innan du bokar. Mindre motiv har ett minimipris.",
+    q: "Vad kostar det?",
+    a: "Beror på storlek, detaljer och antal sittningar. Du får en tydlig uppskattning vid konsultationen, innan du bokar.",
   },
   {
     q: "Finns det åldersgräns?",
-    a: "Ja. Du måste vara 18 år och kunna visa giltig legitimation. Vi tatuerar inte minderåriga, inte heller med målsmans tillstånd.",
+    a: "Ja — 18 år och giltig legitimation. Inga undantag, inte heller med målsmans tillstånd.",
   },
   {
-    q: "Hur förbereder jag mig inför sittningen?",
-    a: "Sov ordentligt, ät en riktig måltid innan och drick vatten. Undvik alkohol dygnet före. Ha bekväma kläder som gör området lätt att komma åt — och ta med något att dricka om det blir en lång sittning.",
+    q: "Hur förbereder jag mig?",
+    a: "Sov, ät ordentligt och drick vatten. Ingen alkohol dygnet före. Ha kläder som gör området lätt att komma åt.",
   },
   {
-    q: "Hur sköter jag om tatueringen efteråt?",
-    a: "Du får både muntlig och skriftlig eftervård med dig hem. Kort version: håll rent, smörj tunt, undvik bad, bastu och direkt sol tills allt är läkt — och pilla inte på sårskorpan.",
+    q: "Hur sköter jag den efteråt?",
+    a: "Håll rent, smörj tunt, undvik bad, bastu och sol tills den läkt. Full eftervård får du med dig hem.",
   },
   {
-    q: "Gör ni cover-ups på gamla tatueringar?",
-    a: "Ofta, ja. Hur mycket som går att göra beror på hur mörk och stor den gamla tatueringen är. Kom in för en bedömning så är vi raka med vad som är realistiskt.",
+    q: "Gör ni cover-ups?",
+    a: "Ofta, ja. Hur mycket som går beror på den gamla tatueringen. Kom in för en bedömning.",
   },
 ] as const;
 

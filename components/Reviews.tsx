@@ -1,11 +1,13 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, type MotionValue } from "motion/react";
 import { reviews, reviewCount, averageRating, REVIEWS_VERIFIED, type Review } from "@/lib/reviews";
 import Marquee from "@/components/ui/Marquee";
 import Counter from "@/components/ui/Counter";
 import { MaskUp } from "@/components/ui/SplitText";
 import { contact } from "@/lib/site";
+import SectionHead from "@/components/ui/SectionHead";
+import { useVelocitySkew } from "@/components/ui/useVelocitySkew";
 
 function Stars({ n }: { n: number }) {
   return (
@@ -25,9 +27,9 @@ function Stars({ n }: { n: number }) {
   );
 }
 
-function Card({ review }: { review: Review }) {
+function Card({ review, skew }: { review: Review; skew: MotionValue<number> }) {
   return (
-    <article className="mx-3 flex w-[clamp(19rem,29vw,26rem)] shrink-0 flex-col justify-between gap-6 rounded-sm border border-bone/12 bg-ink-2/70 p-7 backdrop-blur-sm transition-colors duration-500 hover:border-bone/25">
+    <motion.article style={{ skewY: skew }} className="mx-3 flex w-[clamp(19rem,29vw,26rem)] shrink-0 flex-col justify-between gap-6 rounded-sm border border-bone/12 bg-ink-2/70 p-7 backdrop-blur-sm transition-colors duration-500 hover:border-bone/25">
       <Stars n={review.rating} />
       <p className="text-[0.95rem] leading-relaxed text-bone/85">“{review.body}”</p>
       <footer className="flex items-end justify-between gap-4 border-t border-bone/10 pt-4">
@@ -45,21 +47,19 @@ function Card({ review }: { review: Review }) {
           </span>
         ) : null}
       </footer>
-    </article>
+    </motion.article>
   );
 }
 
 export default function Reviews() {
+  const skew = useVelocitySkew(2);
   const rowA = reviews.slice(0, Math.ceil(reviews.length / 2));
   const rowB = reviews.slice(Math.ceil(reviews.length / 2));
 
   return (
     <section id="omdomen" className="relative overflow-hidden py-[clamp(5rem,12vh,9rem)]">
       <div className="edge">
-        <div className="flex items-baseline gap-4">
-          <span className="eyebrow">05 — Omdömen</span>
-          <span className="hairline flex-1" />
-        </div>
+        <SectionHead index="05" label="Omdömen" />
 
         <div className="mt-10 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
           <MaskUp>
@@ -107,12 +107,12 @@ export default function Reviews() {
       <div className="mt-14 flex flex-col gap-4 md:gap-6">
         <Marquee baseSpeed={38} direction={-1}>
           {rowA.map((r, i) => (
-            <Card key={`a-${i}`} review={r} />
+            <Card key={`a-${i}`} review={r} skew={skew} />
           ))}
         </Marquee>
         <Marquee baseSpeed={38} direction={1}>
           {rowB.map((r, i) => (
-            <Card key={`b-${i}`} review={r} />
+            <Card key={`b-${i}`} review={r} skew={skew} />
           ))}
         </Marquee>
       </div>

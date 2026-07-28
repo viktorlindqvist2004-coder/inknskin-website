@@ -1,45 +1,93 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useRef } from "react";
-import { galleryColumns, type Asset } from "@/lib/media";
+import { portfolio, portfolioColumns, type Work } from "@/lib/portfolio";
 import { MaskUp } from "@/components/ui/SplitText";
+import SectionHead from "@/components/ui/SectionHead";
+import { useVelocitySkew } from "@/components/ui/useVelocitySkew";
 import { contact } from "@/lib/site";
 
-function Tile({ asset, index }: { asset: Asset; index: number }) {
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+function Tile({
+  work,
+  index,
+  skew,
+}: {
+  work: Work;
+  index: number;
+  skew: MotionValue<number>;
+}) {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  // The photo drifts and breathes inside its frame, independent of the column.
+  const imgY = useTransform(scrollYProgress, [0, 1], ["-7%", "7%"]);
+  const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.16, 1.04, 1.16]);
+
   return (
     <motion.figure
-      className="group relative overflow-hidden rounded-sm bg-ink-2"
-      initial={{ clipPath: "inset(14% 14% 14% 14%)", opacity: 0 }}
-      whileInView={{ clipPath: "inset(0% 0% 0% 0%)", opacity: 1 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 1.25, ease: [0.16, 1, 0.3, 1], delay: (index % 3) * 0.08 }}
-      data-cursor="Se mer"
+      ref={ref}
+      className="group relative"
+      style={{ skewY: skew }}
+      data-cursor={work.style}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={asset.src}
-        alt={asset.alt}
-        width={asset.width}
-        height={asset.height}
-        loading="lazy"
-        decoding="async"
-        className="h-full w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.07]"
-      />
-      <div className="pointer-events-none absolute inset-0 bg-ink/25 transition-opacity duration-700 group-hover:opacity-0" />
-      <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-bone/10" />
+      <motion.div
+        className="relative overflow-hidden rounded-sm bg-ink-2"
+        initial={{ clipPath: "inset(100% 0 0 0)" }}
+        whileInView={{ clipPath: "inset(0% 0 0 0)" }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 1.3, ease: EASE, delay: (index % 3) * 0.09 }}
+      >
+        <div className="aspect-[4/5] overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <motion.img
+            src={work.src}
+            alt={work.alt}
+            width={work.width}
+            height={work.height}
+            loading="lazy"
+            decoding="async"
+            style={{ y: imgY, scale: imgScale }}
+            className="h-full w-full object-cover transition-[filter] duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:brightness-110"
+          />
+        </div>
+        <div className="pointer-events-none absolute inset-0 bg-ink/20 transition-opacity duration-700 group-hover:opacity-0" />
+        <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-bone/10" />
+      </motion.div>
+
+      <motion.figcaption
+        className="mt-3 flex items-baseline justify-between gap-3 overflow-hidden"
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.6 }}
+        transition={{ duration: 0.9, ease: EASE, delay: 0.25 + (index % 3) * 0.09 }}
+      >
+        <span className="text-[0.72rem] uppercase tracking-[0.16em] text-bone transition-colors duration-500 group-hover:text-ember">
+          {work.style}
+        </span>
+        <span className="h-px flex-1 bg-bone/12" aria-hidden />
+        <span className="text-[0.68rem] uppercase tracking-[0.14em] text-muted">
+          {work.placement}
+        </span>
+      </motion.figcaption>
     </motion.figure>
   );
 }
 
 /** One column that drifts at its own rate as the section passes the viewport. */
 function Column({
-  assets,
+  works,
   speed,
+  skew,
   className = "",
 }: {
-  assets: Asset[];
+  works: Work[];
   speed: number;
+  skew: MotionValue<number>;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -50,47 +98,72 @@ function Column({
   const y = useTransform(scrollYProgress, [0, 1], [`${speed}%`, `${-speed}%`]);
 
   return (
-    <motion.div ref={ref} style={{ y }} className={`flex flex-col gap-4 md:gap-6 ${className}`}>
-      {assets.map((a, i) => (
-        <Tile key={`${a.local}-${i}`} asset={a} index={i} />
+    <motion.div
+      ref={ref}
+      style={{ y }}
+      className={`flex flex-col gap-8 md:gap-12 ${className}`}
+    >
+      {works.map((w, i) => (
+        <Tile key={w.src} work={w} index={i} skew={skew} />
       ))}
     </motion.div>
   );
 }
 
 export default function Gallery() {
+  const skew = useVelocitySkew(2.6);
+  const cols = portfolioColumns(3);
+
+  // Mobile shows two columns, so the third column's works are folded into them.
+  const mobileCols = portfolioColumns(2);
+
   return (
     <section id="arbeten" className="relative py-[clamp(5rem,12vh,9rem)]">
       <div className="edge">
-        <div className="flex items-baseline gap-4">
-          <span className="eyebrow">03 — Arbeten</span>
-          <span className="hairline flex-1" />
-        </div>
+        <SectionHead index="03" label="Arbeten" />
 
         <div className="mt-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <MaskUp>
             <h2 className="display t-xl text-bone">Portfolio</h2>
           </MaskUp>
-          <p className="max-w-sm pb-3 text-[0.93rem] leading-relaxed text-bone-dim">
-            Ett urval från studion. Hela flödet med färska jobb, pågående projekt
-            och lediga tider ligger på Instagram.
-          </p>
+          <motion.p
+            className="max-w-sm pb-3 text-[0.93rem] leading-relaxed text-bone-dim"
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.9, ease: EASE, delay: 0.15 }}
+          >
+            Ett urval från studion. Hela flödet ligger på Instagram.
+          </motion.p>
         </div>
       </div>
 
-      <div className="edge mt-14">
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
-          <Column assets={galleryColumns[0]} speed={7} />
-          <Column assets={galleryColumns[1]} speed={-9} className="md:pt-16" />
-          <Column
-            assets={galleryColumns[2]}
-            speed={5}
-            className="hidden md:flex md:pt-6"
-          />
+      <div className="edge mt-16">
+        {/* Desktop: three columns at different parallax speeds */}
+        <div className="hidden gap-6 md:grid md:grid-cols-3">
+          <Column works={cols[0]} speed={8} skew={skew} />
+          <Column works={cols[1]} speed={-10} skew={skew} className="pt-20" />
+          <Column works={cols[2]} speed={6} skew={skew} className="pt-8" />
+        </div>
+
+        {/* Mobile: two columns, every work still shown */}
+        <div className="grid grid-cols-2 gap-5 md:hidden">
+          <Column works={mobileCols[0]} speed={5} skew={skew} />
+          <Column works={mobileCols[1]} speed={-6} skew={skew} className="pt-10" />
         </div>
       </div>
 
-      <div className="edge mt-14 flex justify-center">
+      <div className="edge mt-20 flex flex-col items-center gap-6">
+        <motion.span
+          className="text-[0.7rem] uppercase tracking-[0.2em] text-muted"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.8 }}
+          transition={{ duration: 1 }}
+        >
+          {portfolio.length} arbeten visade
+        </motion.span>
+
         <a
           href={contact.instagram}
           target="_blank"

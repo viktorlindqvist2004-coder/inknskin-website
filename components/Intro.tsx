@@ -4,9 +4,10 @@ import { motion, useScroll, useTransform, type MotionValue } from "motion/react"
 import { useRef } from "react";
 import { videos } from "@/lib/media";
 import Counter from "@/components/ui/Counter";
+import SectionHead from "@/components/ui/SectionHead";
 
 const COPY =
-  "Vi tatuerar inte motiv. Vi bygger något som ska sitta på dig resten av livet — ritat från grunden, anpassat efter din kropp och utfört med tålamod tills varje linje ligger rätt.";
+  "Vi tatuerar inte motiv. Vi bygger något som ska sitta på dig resten av livet.";
 
 /** Each word fades from ghost to bone as the block scrolls through the viewport. */
 function Word({
@@ -48,10 +49,7 @@ export default function Intro() {
 
   return (
     <section ref={ref} id="studion" className="edge relative py-[clamp(6rem,14vh,11rem)]">
-      <div className="flex items-baseline gap-4">
-        <span className="eyebrow">01 — Studion</span>
-        <span className="hairline flex-1" />
-      </div>
+      <SectionHead index="01" label="Studion" />
 
       <p className="display mt-12 max-w-[22ch] text-[clamp(1.75rem,4.6vw,4.2rem)] leading-[1.02] tracking-[-0.035em] text-bone md:max-w-[26ch]">
         {words.map((w, i) => {
@@ -88,15 +86,13 @@ export default function Intro() {
         </div>
 
         <div className="grid grid-cols-2 gap-x-6 gap-y-10">
-          <Stat value={<Counter to={1} />} label="Tatuerare — samma hand hela vägen" />
-          <Stat value={<Counter to={16} suffix="B" />} label="Kungsgatan, Trollhättan" />
+          <Stat value={<Counter to={1} />} label="Tatuerare — samma hand" />
+          <Stat value={<Counter to={16} suffix="B" />} label="Kungsgatan" />
           <Stat value={<Counter to={5} suffix=" min" />} label="Från Trollhättan C" />
-          <Stat value={<Counter to={100} suffix="%" />} label="Steril engångsutrustning" />
+          <Stat value={<Counter to={100} suffix="%" />} label="Steril utrustning" />
 
           <p className="col-span-2 mt-2 max-w-md text-[0.95rem] leading-relaxed text-bone-dim">
-            Studion ligger på Kungsgatan 16B, ungefär fem minuters promenad från
-            Trollhättan Central. Bemannad måndag till fredag 12:00–16:30 — tider
-            utanför det bokas via DM eller direkt på plats.
+            Bemannat mån–fre 12:00–16:30. Andra tider via DM.
           </p>
         </div>
       </div>

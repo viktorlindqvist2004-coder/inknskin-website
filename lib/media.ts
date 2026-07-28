@@ -23,7 +23,7 @@ export type Asset = {
   alt: string;
 };
 
-function asset(
+export function asset(
   remoteFile: string,
   localFile: string,
   width: number,
@@ -132,9 +132,6 @@ export const videos = {
   ),
 } as const;
 
-/** Bildväggen i galleriet — tre kolumner som rör sig i olika hastighet. */
-export const galleryColumns: Asset[][] = [
-  [images.arm, images.tools, images.flash],
-  [images.fineline, images.corridor, images.needle],
-  [images.needle, images.ink, images.arm],
-];
+/* Portfoliobilderna bor i lib/portfolio.ts — det är den filen du redigerar
+   för att lägga in studions egna jobb. Bilderna här är stämningsmaterial som
+   används i hero, studiosektionen och bakom tatuerarsektionen. */

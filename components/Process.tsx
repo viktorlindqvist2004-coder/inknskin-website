@@ -4,6 +4,7 @@ import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { useRef } from "react";
 import { process } from "@/lib/site";
 import { MaskUp } from "@/components/ui/SplitText";
+import SectionHead from "@/components/ui/SectionHead";
 
 export default function Process() {
   const ref = useRef<HTMLDivElement>(null);
@@ -20,10 +21,7 @@ export default function Process() {
 
   return (
     <section id="process" className="edge relative py-[clamp(5rem,12vh,9rem)]">
-      <div className="flex items-baseline gap-4">
-        <span className="eyebrow">06 — Från idé till hud</span>
-        <span className="hairline flex-1" />
-      </div>
+      <SectionHead index="06" label="Från idé till hud" />
 
       <div ref={ref} className="mt-12 grid gap-14 md:grid-cols-[0.85fr_1.15fr] md:gap-20">
         {/* Sticky column */}
@@ -32,8 +30,8 @@ export default function Process() {
             <h2 className="display t-lg text-bone">Så går det till</h2>
           </MaskUp>
           <p className="mt-6 max-w-sm text-[0.95rem] leading-relaxed text-bone-dim">
-            Ingen ska sitta i stolen och undra vad som händer härnäst. Fyra steg,
-            samma varje gång — från första meddelandet till läkt tatuering.
+            Fyra steg, samma varje gång — från första meddelandet till läkt
+            tatuering.
           </p>
 
           <div className="mt-10 flex items-center gap-4">

@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { services } from "@/lib/site";
 import { images } from "@/lib/media";
 import { MaskUp } from "@/components/ui/SplitText";
+import SectionHead from "@/components/ui/SectionHead";
 
 // One frame per service, in list order.
 const PREVIEWS = [
@@ -34,10 +35,7 @@ export default function Services() {
 
   return (
     <section id="tjanster" className="edge relative py-[clamp(5rem,12vh,9rem)]">
-      <div className="flex items-baseline gap-4">
-        <span className="eyebrow">02 — Vad vi gör</span>
-        <span className="hairline flex-1" />
-      </div>
+      <SectionHead index="02" label="Vad vi gör" />
 
       <MaskUp className="mt-10">
         <h2 className="display t-xl text-bone">Arbetet</h2>

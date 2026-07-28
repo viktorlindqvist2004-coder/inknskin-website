@@ -6,6 +6,7 @@ import { contact, hours } from "@/lib/site";
 import { videos } from "@/lib/media";
 import { MaskUp } from "@/components/ui/SplitText";
 import Magnetic from "@/components/ui/Magnetic";
+import SectionHead from "@/components/ui/SectionHead";
 
 export default function Contact() {
   const ref = useRef<HTMLElement>(null);
@@ -17,10 +18,7 @@ export default function Contact() {
 
   return (
     <section ref={ref} id="kontakt" className="edge relative py-[clamp(5rem,12vh,9rem)]">
-      <div className="flex items-baseline gap-4">
-        <span className="eyebrow">08 — Kontakt</span>
-        <span className="hairline flex-1" />
-      </div>
+      <SectionHead index="08" label="Kontakt" />
 
       <div className="mt-12 grid gap-14 lg:grid-cols-[1fr_0.72fr] lg:gap-16">
         <div className="flex flex-col">
@@ -29,9 +27,8 @@ export default function Contact() {
           </MaskUp>
 
           <p className="mt-8 max-w-lg text-[1rem] leading-relaxed text-bone-dim">
-            Skicka en DM med din idé — motiv, ungefärlig storlek och placering,
-            gärna med referensbilder. Eller kom förbi studion på Kungsgatan under
-            bemannad tid så tar vi det över disk.
+            Skicka en DM med din idé — motiv, storlek och placering. Eller kom
+            förbi studion under bemannad tid.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">

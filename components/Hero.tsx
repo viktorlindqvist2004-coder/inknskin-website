@@ -101,9 +101,8 @@ export default function Hero() {
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 1.95 }}
         >
           <p className="max-w-md text-[0.95rem] leading-relaxed text-bone-dim">
-            Tatueringsstudio mitt i Trollhättan. Custom design, fineline, blackwork
-            och cover-up — ritat och utfört för hand, med lång erfarenhet av alla
-            stilar och motiv.
+            Tatueringsstudio mitt i Trollhättan. Custom design, fineline,
+            blackwork och cover-up.
           </p>
 
           <div className="flex flex-wrap items-end gap-x-10 gap-y-4">

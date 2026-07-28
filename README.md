@@ -31,8 +31,20 @@ påstår aldrig något om betyg som inte är verifierat.
 
 Allt media är genererat, inte fotograferat i studion. Det föreställer ingen
 verklig person och inga verkliga tatueringar gjorda av studion.
-Byt ut mot studions egna bilder så fort de finns — behåll filnamnen i
-`local`-fälten i `lib/media.ts` så behöver inget annat ändras.
+
+**Portfoliobilderna** byts i `lib/portfolio.ts` — filen är byggd för just det.
+Lägg studions foton i `public/media/portfolio/` och peka om varje rad:
+
+```ts
+{ src: "/media/portfolio/01.jpg", width: 1600, height: 2000,
+  alt: "Kort beskrivning", style: "Fineline", placement: "Underarm" },
+```
+
+Rutnätet, parallaxen och bildtexterna anpassar sig automatiskt efter hur många
+jobb som ligger i listan. Sätt `PORTFOLIO_IS_REAL_WORK = true` när det är gjort.
+
+**Stämningsmaterialet** (hero, studiosektionen, bakgrunden bakom tatueraren)
+byts i `lib/media.ts` — behåll filnamnen i `local`-fälten.
 
 ---
 
