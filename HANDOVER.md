@@ -29,6 +29,26 @@ Sidan byggs som en **helt statisk export** (se `next.config.ts`), så den är
 bara HTML, CSS och JS. Det betyder att den fungerar på i princip vilken värd
 som helst — du är aldrig låst till någon.
 
+### Ordningen spelar roll — börja inte på ditt eget konto
+
+Du behöver **inget Cloudflare-konto**. Allt sätts upp direkt på kundens.
+
+Frestelsen är att lägga upp sidan på sitt eget konto först och flytta den sen.
+Gör inte det: **Cloudflare Pages har ingen funktion för att flytta ett projekt
+mellan konton.** Till skillnad från GitHub, som har en färdig
+"Transfer ownership"-knapp, måste ett Pages-projekt raderas och byggas upp på
+nytt på det andra kontot — inklusive domänkoppling och miljövariabler.
+
+Rätt ordning:
+
+1. Kunden skapar kontona
+2. Du överför GitHub-repot till dem
+3. Kunden (eller du, inloggad på deras konto) kopplar Cloudflare Pages
+
+Är kunden inte teknisk: sitt bredvid eller dela skärm. De skapar kontona med
+sin egen e-post och sitt eget lösenord, du klickar. Då står allt på dem från
+dag ett, utan att du någonsin äger något som måste flyttas senare.
+
 ### Steg för steg
 
 **1. Kunden skapar två konton (gratis, 5 min)**
