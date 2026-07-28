@@ -124,8 +124,7 @@ till ett vanligt webbhotell, om studion redan betalar för ett.
 
 ## Kvar att göra innan lansering
 
-Två saker är fortfarande platshållare och bör vara på plats innan sidan är
-publik. Båda står också i README.
+En av tre punkter är kvar. Alla står också i README.
 
 1. ~~Omdömena är platshållare~~ — **klart.** Tio riktiga Google-omdömen ligger
    nu i `lib/reviews.generated.json`, avskrivna ordagrant. Kontrollera att
@@ -134,8 +133,19 @@ publik. Båda står också i README.
    `npm run fetch-reviews` med en Places API-nyckel för att uppdatera dem
    automatiskt i framtiden.
 
-2. **Portfoliobilderna är AI-genererat material**, inte studions egna jobb.
-   Byt dem i `lib/portfolio.ts`. Fotot på Arash och loggan är däremot äkta.
+2. ~~Portfoliobilderna är AI-genererat material~~ — **klart.** Portfolion,
+   porträtten och loggan är studions egna. Bilderna är beskurna ur Instagram
+   och därför något mjukare än originalen; be om originalfilerna när tillfälle
+   ges och byt dem i `lib/portfolio.ts`.
+
+3. **Åtta filer hämtas fortfarande från en server ni inte äger** — de fyra
+   filmerna och deras posterbilder. Kör `npm run handover` en gång, från en
+   dator med internet; kommandot hämtar hem dem, ställer om koden till de
+   lokala kopiorna och kontrollerar resultatet. Se `START.md`.
+
+   Görs det inte fungerar sidan ändå — men den dagen den servern släcks blir
+   hero-videon svart utan att någon rört koden. `npm run check-media` säger
+   till så länge det är kvar att göra.
 
 ---
 

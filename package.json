@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "npx serve out",
     "lint": "tsc --noEmit",
+    "handover": "node scripts/handover.mjs",
     "fetch-media": "node scripts/fetch-media.mjs",
     "fetch-reviews": "node scripts/fetch-google-reviews.mjs",
     "check-media": "node scripts/check-media.mjs"
