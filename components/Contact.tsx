@@ -7,6 +7,7 @@ import { videos } from "@/lib/media";
 import { MaskUp } from "@/components/ui/SplitText";
 import Magnetic from "@/components/ui/Magnetic";
 import SectionHead from "@/components/ui/SectionHead";
+import ImageReveal from "@/components/ui/ImageReveal";
 
 export default function Contact() {
   const ref = useRef<HTMLElement>(null);
@@ -135,26 +136,26 @@ export default function Contact() {
         </div>
 
         {/* Vertical film panel */}
-        <motion.div
-          className="relative hidden aspect-[9/14] overflow-hidden rounded-sm bg-ink-2 lg:block"
-          initial={{ clipPath: "inset(0 0 100% 0)" }}
-          whileInView={{ clipPath: "inset(0 0 0% 0)" }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
-        >
-          <motion.video
-            className="h-[118%] w-full object-cover"
-            style={{ y: videoY }}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="none"
-            poster={videos.heroVertical.poster}
-            aria-hidden
+        <div className="relative hidden lg:block">
+          <ImageReveal
+            className="relative aspect-[9/14] rounded-sm bg-ink-2"
+            from="top"
+            duration={1.4}
           >
-            <source src={videos.heroVertical.src} type="video/mp4" />
-          </motion.video>
+            <motion.video
+              className="h-[118%] w-full object-cover"
+              style={{ y: videoY }}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="none"
+              poster={videos.heroVertical.poster}
+              aria-hidden
+            >
+              <source src={videos.heroVertical.src} type="video/mp4" />
+            </motion.video>
+          </ImageReveal>
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-ink/30" />
           <div className="absolute inset-x-6 bottom-6">
             <span className="eyebrow">Kungsgatan 16B</span>
@@ -162,7 +163,7 @@ export default function Contact() {
               Trollhättan
             </p>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

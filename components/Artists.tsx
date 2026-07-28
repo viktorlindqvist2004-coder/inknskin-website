@@ -6,6 +6,7 @@ import { artists } from "@/lib/site";
 import { images, videos, type Asset } from "@/lib/media";
 import { MaskUp } from "@/components/ui/SplitText";
 import SectionHead from "@/components/ui/SectionHead";
+import ImageReveal from "@/components/ui/ImageReveal";
 
 type Artist = (typeof artists)[number];
 
@@ -64,26 +65,26 @@ function Solo({ artist }: { artist: Artist }) {
       viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
     >
-      <motion.div
-        className="relative aspect-[4/5] overflow-hidden rounded-sm bg-ink-2"
-        initial={{ clipPath: "inset(0 0 100% 0)" }}
-        whileInView={{ clipPath: "inset(0 0 0% 0)" }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={PORTRAITS[0].src}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover grayscale transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06] group-hover:grayscale-0"
-        />
+      <div className="relative">
+        <ImageReveal
+          className="relative aspect-[4/5] rounded-sm bg-ink-2"
+          from="top"
+          duration={1.4}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={PORTRAITS[0].src}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover grayscale transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06] group-hover:grayscale-0"
+          />
+        </ImageReveal>
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
         <span className="absolute left-5 top-5 font-mono text-[0.7rem] tracking-[0.22em] text-bone/60">
           01
         </span>
-      </motion.div>
+      </div>
 
       <div>
         <p className="text-[0.72rem] uppercase tracking-[0.2em] text-ember">

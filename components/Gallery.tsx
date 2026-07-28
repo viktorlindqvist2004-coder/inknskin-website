@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { portfolio, portfolioColumns, type Work } from "@/lib/portfolio";
 import { MaskUp } from "@/components/ui/SplitText";
 import SectionHead from "@/components/ui/SectionHead";
+import ImageReveal from "@/components/ui/ImageReveal";
 import { useVelocitySkew } from "@/components/ui/useVelocitySkew";
 import { contact } from "@/lib/site";
 
@@ -35,14 +36,11 @@ function Tile({
       style={{ skewY: skew }}
       data-cursor={work.style}
     >
-      <motion.div
-        className="relative overflow-hidden rounded-sm bg-ink-2"
-        initial={{ clipPath: "inset(100% 0 0 0)" }}
-        whileInView={{ clipPath: "inset(0% 0 0 0)" }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 1.3, ease: EASE, delay: (index % 3) * 0.09 }}
-      >
-        <div className="aspect-[4/5] overflow-hidden">
+      <div className="relative">
+        <ImageReveal
+          className="relative aspect-[4/5] rounded-sm bg-ink-2"
+          delay={(index % 3) * 0.09}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <motion.img
             src={work.src}
@@ -54,10 +52,10 @@ function Tile({
             style={{ y: imgY, scale: imgScale }}
             className="h-full w-full object-cover transition-[filter] duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform group-hover:brightness-110"
           />
-        </div>
+        </ImageReveal>
         <div className="pointer-events-none absolute inset-0 bg-ink/20 transition-opacity duration-700 group-hover:opacity-0" />
         <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-bone/10" />
-      </motion.div>
+      </div>
 
       <motion.figcaption
         className="mt-3 flex items-baseline justify-between gap-3 overflow-hidden"

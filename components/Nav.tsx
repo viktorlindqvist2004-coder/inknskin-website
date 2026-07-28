@@ -92,9 +92,9 @@ export default function Nav() {
         {open && (
           <motion.div
             className="fixed inset-0 z-40 flex flex-col justify-center bg-ink edge md:hidden"
-            initial={{ clipPath: "inset(0 0 100% 0)" }}
-            animate={{ clipPath: "inset(0 0 0% 0)" }}
-            exit={{ clipPath: "inset(0 0 100% 0)" }}
+            initial={{ y: "-100%" }}
+            animate={{ y: "0%" }}
+            exit={{ y: "-100%" }}
             transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
           >
             <nav className="flex flex-col gap-2" aria-label="Mobilmeny">
