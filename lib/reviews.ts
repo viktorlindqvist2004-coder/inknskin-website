@@ -1,44 +1,40 @@
 /* =============================================================================
- *  ⚠️  PLACEHOLDER-OMDÖMEN — MÅSTE BYTAS UT INNAN LANSERING  ⚠️
+ *  OMDÖMEN
  * =============================================================================
  *
- *  Texterna nedan är EXEMPEL. De är skrivna för att visa hur sektionen ser ut
- *  och beter sig — de är INTE riktiga kundomdömen om Ink N Skin.
+ *  Sidan visar riktiga Google-omdömen så fort de finns, annars platshållare.
+ *  Du behöver inte redigera den här filen — kör bara:
  *
- *  Att publicera påhittade omdömen som äkta är vilseledande marknadsföring och
- *  strider mot både marknadsföringslagen och Googles villkor. Byt ut dem.
+ *      export GOOGLE_MAPS_API_KEY=...     # Places API (New) måste vara aktiverat
+ *      npm run fetch-reviews
  *
- *  SÅ HÄR HÄMTAR DU DE RIKTIGA:
- *    1. Skaffa en Google Places API-nyckel  →  https://console.cloud.google.com
- *    2. export GOOGLE_MAPS_API_KEY=...
- *    3. node scripts/fetch-google-reviews.mjs
- *       (skriptet skriver lib/reviews.generated.json)
- *    4. Importera den filen här nedan och sätt `verified: true`.
+ *  Skriptet fyller `lib/reviews.generated.json`, och allt nedan växlar över av
+ *  sig självt: texterna, snittbetyget, antalet och aggregateRating i den
+ *  strukturerade datan.
  *
- *  Så länge `verified` är false renderas INGEN aggregateRating i strukturerad
- *  data — sidan påstår alltså aldrig utåt att betyget är verifierat.
+ *  Så länge den filen är tom används EXEMPELTEXTERNA längst ned. De är inte
+ *  riktiga kundomdömen. Att publicera påhittade omdömen som äkta är
+ *  vilseledande marknadsföring och bryter mot Googles villkor — därför skickas
+ *  inget betyg ut i strukturerad data förrän riktiga omdömen är på plats.
  * ---------------------------------------------------------------------------*/
 
+import generated from "./reviews.generated.json";
+
 export type Review = {
-  /** Visningsnamn. Vid riktiga Google-omdömen: använd namnet som recensenten själv publicerat. */
+  /** Visningsnamn. Vid riktiga Google-omdömen: namnet som recensenten själv publicerat. */
   author: string;
   /** 1–5 */
   rating: number;
-  /** Själva omdömestexten. */
+  /** Själva omdömestexten. Återges ordagrant — Googles villkor tillåter inte redigering. */
   body: string;
-  /** Valfri kontext, t.ex. vilken typ av jobb det gällde. */
+  /** Valfri kontext, t.ex. vilken typ av jobb det gällde. Bara för platshållarna. */
   context?: string;
   /** Valfri källa, t.ex. "Google" eller "Instagram". */
   source?: string;
 };
 
-/**
- * Sätt till true först när innehållet nedan ersatts med verifierade omdömen.
- * Styr strukturerad data (aggregateRating) och utvecklingsvarningen.
- */
-export const REVIEWS_VERIFIED = false;
-
-export const reviews: Review[] = [
+/** Exempeltexter. Används bara så länge inga riktiga omdömen hämtats. */
+const PLACEHOLDERS: Review[] = [
   {
     author: "Exempelkund 1",
     rating: 5,
@@ -83,7 +79,32 @@ export const reviews: Review[] = [
   },
 ];
 
-export const reviewCount = reviews.length;
+type GeneratedReview = { author?: string; rating?: number; body?: string; source?: string };
 
-export const averageRating =
-  Math.round((reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length) * 10) / 10;
+const fetched: Review[] = ((generated.reviews ?? []) as GeneratedReview[])
+  .filter((r) => Boolean(r?.body && r.body.trim().length > 0))
+  .map((r) => ({
+    author: r.author || "Google-användare",
+    rating: typeof r.rating === "number" ? r.rating : 5,
+    body: (r.body ?? "").trim(),
+    source: r.source ?? "Google",
+  }));
+
+/** True först när riktiga omdömen hämtats. Styr aggregateRating i StructuredData. */
+export const REVIEWS_VERIFIED = fetched.length > 0;
+
+export const reviews: Review[] = REVIEWS_VERIFIED ? fetched : PLACEHOLDERS;
+
+/**
+ * Google lämnar bara ut ett urval av omdömena via API:et, men `rating` och
+ * `userRatingCount` gäller samtliga. Använd dem när de finns — annars skulle
+ * sidan visa "5 omdömen" för en studio som i själva verket har femtio.
+ */
+export const reviewCount = REVIEWS_VERIFIED
+  ? generated.userRatingCount || fetched.length
+  : reviews.length;
+
+export const averageRating = REVIEWS_VERIFIED
+  ? (generated.rating ??
+      Math.round((fetched.reduce((s, r) => s + r.rating, 0) / fetched.length) * 10) / 10)
+  : Math.round((reviews.reduce((s, r) => s + r.rating, 0) / reviews.length) * 10) / 10;

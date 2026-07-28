@@ -92,4 +92,13 @@ await writeFile(out, JSON.stringify(output, null, 2) + "\n");
 console.log(
   `Skrev ${output.reviews.length} omdömen (betyg ${output.rating}, ${output.userRatingCount} totalt) till lib/reviews.generated.json`,
 );
-console.log("Importera dem i lib/reviews.ts och sätt REVIEWS_VERIFIED = true.");
+
+if (output.reviews.length === 0) {
+  console.log(
+    "\nInga omdömen kom med. Kontrollera att platsen stämmer — sätt PLACES_QUERY\n" +
+      "om sökningen hittade fel ställe. Sidan fortsätter visa platshållarna.",
+  );
+} else {
+  console.log("\nKlart — sidan växlar över automatiskt. Inget behöver redigeras.");
+  console.log("Bygg om och pusha: npm run build && git commit -am 'Riktiga omdömen' && git push");
+}

@@ -51,10 +51,26 @@ function Card({ review, skew }: { review: Review; skew: MotionValue<number> }) {
   );
 }
 
+/**
+ * The marquee wraps at exactly one copy of its content, so a row narrower than
+ * the viewport leaves a visible gap mid-band. Google's API only ever returns a
+ * handful of reviews, which can put as few as two cards in a row — repeat the
+ * row until it is comfortably wider than any screen.
+ */
+const MIN_PER_ROW = 5;
+
+function fill(row: Review[]): Review[] {
+  if (row.length === 0) return row;
+  const out: Review[] = [];
+  while (out.length < MIN_PER_ROW) out.push(...row);
+  return out;
+}
+
 export default function Reviews() {
   const skew = useVelocitySkew(2);
-  const rowA = reviews.slice(0, Math.ceil(reviews.length / 2));
-  const rowB = reviews.slice(Math.ceil(reviews.length / 2));
+  const half = Math.ceil(reviews.length / 2);
+  const rowA = fill(reviews.slice(0, half));
+  const rowB = fill(reviews.slice(half).length ? reviews.slice(half) : reviews.slice(0, half));
 
   return (
     <section id="omdomen" className="relative overflow-hidden py-[clamp(5rem,12vh,9rem)]">

@@ -1,0 +1,8 @@
+{
+  "_comment": "Skrivs av `npm run fetch-reviews`. Så länge reviews-listan är tom använder sidan platshållarna i lib/reviews.ts.",
+  "placeId": null,
+  "fetchedAt": null,
+  "rating": null,
+  "userRatingCount": 0,
+  "reviews": []
+}
