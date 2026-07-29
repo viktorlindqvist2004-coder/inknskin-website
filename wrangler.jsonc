@@ -15,6 +15,12 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "inknskin-website",
   "compatibility_date": "2026-07-29",
+
+  // Ger sidan en adress på <namn>.<ditt-konto>.workers.dev direkt vid deploy.
+  // Utan det här står det "No URLs enabled" i Cloudflare och sidan går inte att
+  // öppna, trots att bygget lyckats. Kontot måste ha valt ett workers.dev-
+  // subdomännamn en gång — det görs i Cloudflare och kan inte sättas härifrån.
+  "workers_dev": true,
   "assets": {
     "directory": "./out",
     // Next lägger sin 404-sida i out/404.html. Utan det här svarar Cloudflare
