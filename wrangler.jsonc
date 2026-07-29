@@ -1,0 +1,24 @@
+{
+  // Konfiguration för Cloudflare Workers.
+  //
+  // Cloudflare har slagit ihop Pages med Workers, så när man kopplar ett repo i
+  // deras nya gränssnitt hamnar man i Workers-flödet — det som föreslår
+  // `npx wrangler deploy` som deploy-kommando. Utan den här filen har wrangler
+  // ingenting att publicera och bygget stannar.
+  //
+  // Sidan är en helt statisk export (se next.config.ts). Det finns ingen
+  // Worker-kod och inget `main`-fält: `assets` ensamt räcker, och då serverar
+  // Cloudflare bara filerna i ./out direkt från sitt nät.
+  //
+  // Går man i stället den gamla Pages-vägen ignoreras den här filen. Då fyller
+  // man i `npm run build` som build command och `out` som output directory.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "inknskin-website",
+  "compatibility_date": "2026-07-29",
+  "assets": {
+    "directory": "./out",
+    // Next lägger sin 404-sida i out/404.html. Utan det här svarar Cloudflare
+    // med en tom vit sida på adresser som inte finns.
+    "not_found_handling": "404-page"
+  }
+}

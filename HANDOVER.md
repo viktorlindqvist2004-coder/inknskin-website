@@ -20,7 +20,7 @@ Därför ligger rekommendationen nedan **inte** på Vercel.
 
 ---
 
-## Rekommendation: Cloudflare Pages
+## Rekommendation: Cloudflare
 
 Gratis, tillåter uttryckligen kommersiell användning och kundsajter, obegränsad
 bandbredd, gratis SSL och eget domännamn. Inget kreditkort.
@@ -34,16 +34,16 @@ som helst — du är aldrig låst till någon.
 Du behöver **inget Cloudflare-konto**. Allt sätts upp direkt på kundens.
 
 Frestelsen är att lägga upp sidan på sitt eget konto först och flytta den sen.
-Gör inte det: **Cloudflare Pages har ingen funktion för att flytta ett projekt
+Gör inte det: **Cloudflare har ingen funktion för att flytta ett projekt
 mellan konton.** Till skillnad från GitHub, som har en färdig
-"Transfer ownership"-knapp, måste ett Pages-projekt raderas och byggas upp på
-nytt på det andra kontot — inklusive domänkoppling och miljövariabler.
+"Transfer ownership"-knapp, måste projektet raderas och byggas upp på nytt på
+det andra kontot — inklusive domänkoppling.
 
 Rätt ordning:
 
 1. Kunden skapar kontona
 2. Du överför GitHub-repot till dem
-3. Kunden (eller du, inloggad på deras konto) kopplar Cloudflare Pages
+3. Kunden (eller du, inloggad på deras konto) kopplar Cloudflare
 
 Är kunden inte teknisk: sitt bredvid eller dela skärm. De skapar kontona med
 sin egen e-post och sitt eget lösenord, du klickar. Då står allt på dem från
@@ -67,17 +67,27 @@ underhållet.
 > under **Settings → Collaborators**. Men då äger de inte sidan, och det blir
 > ditt konto som är i vägen den dag ni skiljs åt. Överföring är renare.
 
-**3. Koppla Cloudflare Pages**
+**3. Koppla Cloudflare**
 
-I Cloudflare: **Workers & Pages → Create → Pages → Connect to Git** → välj repot.
+I Cloudflare: **Compute (Workers) → Create → Import a repository** → välj repot.
 
-Byggkonfiguration:
+Rör ingenting i inställningarna. `npm run build` och `npx wrangler deploy` står
+redan ifyllda och är rätt. Klicka **Deploy**.
 
-| Fält | Värde |
-| --- | --- |
-| Framework preset | `Next.js (Static HTML Export)` |
-| Build command | `npm run build` |
-| Build output directory | `out` |
+Repot innehåller en `wrangler.jsonc` som talar om att bygget är en statisk sida
+i mappen `out`. Utan den filen har `wrangler deploy` ingenting att publicera —
+det är därför den ligger med.
+
+> Cloudflare har slagit ihop Pages med Workers. Äldre guider (och tidigare
+> versioner av det här dokumentet) säger **Pages → Connect to Git** och att man
+> ska fylla i `out` som *build output directory*. Hamnar du i det gränssnittet
+> fungerar det fortfarande — då ignoreras `wrangler.jsonc` och fälten gäller i
+> stället.
+
+> Fastnar formuläret med ett rött fel som `null is not an object`? Det är ett
+> fel i Cloudflares egen webbsida och dyker upp innan något bygge startat —
+> ingenting i projektet kan orsaka det. Det händer oftast i mobilwebbläsare;
+> gör om steget på en dator.
 
 Klart. Varje push till `main` bygger och publicerar automatiskt.
 
@@ -86,7 +96,7 @@ Klart. Varje push till `main` bygger och publicerar automatiskt.
 Domänen är det enda som kostar pengar, och den ska stå på **kunden**, inte på
 dig — annars sitter de fast hos dig den dagen ni skiljs åt.
 
-I Cloudflare Pages: **Custom domains → Set up a domain**. Cloudflare ger
+I Cloudflare: **Settings → Domains & Routes → Add**. Cloudflare ger
 instruktioner för DNS. SSL-certifikat sköts automatiskt och kostar inget.
 
 > `inknskintattoo.se` svarade inte med studions innehåll när sidan byggdes —
@@ -102,7 +112,7 @@ Alla tillåter kommersiell användning, till skillnad från Vercel Hobby.
 
 | Värd | Gratis? | Kommentar |
 | --- | --- | --- |
-| **Cloudflare Pages** | Ja | Obegränsad bandbredd. Rekommenderas. |
+| **Cloudflare** | Ja | Obegränsad bandbredd. Rekommenderas. |
 | Netlify | Ja | 100 GB/månad. Lika enkelt, samma inställningar. |
 | GitHub Pages | Ja | Enklast om kunden ändå har GitHub. Kräver en liten workflow-fil. |
 | Vercel Pro | Nej, 20 USD/mån | Bara om kunden vill ha just Vercel. |

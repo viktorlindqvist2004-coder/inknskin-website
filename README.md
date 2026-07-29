@@ -37,7 +37,7 @@ ligger i repot. Stämningsmaterialet — de fyra filmerna och deras posterbilder
 hämtas hem automatiskt första gången sidan byggs.
 
 Det sköts av `scripts/prepare-media.mjs`, som `npm run build` kör innan Next
-startar. Det gäller överallt: din dator, Vercel, Cloudflare Pages. Ingen
+startar. Det gäller överallt: din dator, Vercel, Cloudflare. Ingen
 miljövariabel, inget manuellt steg. Den som bara laddar upp filerna på GitHub
 och kopplar en värd får ändå en sida som inte hänger på någon annans server.
 

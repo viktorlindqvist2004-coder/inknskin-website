@@ -34,26 +34,47 @@ rad i rutan längst ner och klicka **Commit changes**.
 
 ## 3. Publicera
 
+Sidan är förberedd för både Cloudflare och Vercel. Är den köpt av en kund,
+välj Cloudflare — se rutan längre ner.
+
+### Cloudflare
+
+1. Gå till https://dash.cloudflare.com och logga in.
+2. **Compute (Workers) → Create → Import a repository**
+3. Välj repot och godkänn åtkomsten till GitHub.
+4. Rör ingenting i inställningarna — `npm run build` och `npx wrangler deploy`
+   är redan ifyllda och är precis rätt. Klicka **Deploy**.
+
+Repot innehåller en `wrangler.jsonc` som talar om att det är en statisk sida i
+mappen `out`. Inga fält att fylla i, inga miljövariabler.
+
+### Vercel
+
 1. Gå till https://vercel.com och logga in **med GitHub**.
-2. **Add New → Project**
-3. Välj repot du just skapade och klicka **Import**.
-4. Rör ingenting i inställningarna. Klicka **Deploy**.
+2. **Add New → Project** → välj repot → **Import**
+3. Rör ingenting. Klicka **Deploy**.
 
-Vercel känner igen projektet av sig självt. Inga miljövariabler, inga
-byggkommandon att fylla i.
-
-Efter ett par minuter får du en adress som slutar på `.vercel.app`. Sidan är
-live.
+Efter ett par minuter får du en adress som slutar på `.workers.dev` respektive
+`.vercel.app`. Sidan är live.
 
 > Första bygget hämtar hem fyra filmer och fyra bilder som ligger på en extern
 > server och lägger dem på din egen. Det sker automatiskt. Skulle bygget
 > misslyckas med ett meddelande om media — klicka **Redeploy**. Nästan alltid
 > är det ett tillfälligt nätverksfel.
 
+> **Fastnar Cloudflares formulär med ett rött fel som `null is not an object`?**
+> Det är ett fel i Cloudflares egen webbsida, inte i projektet — det dyker upp
+> innan något bygge ens startat, så ingenting i koden kan orsaka det. Det
+> händer oftast i mobilwebbläsare. Gör om steget på en dator, så brukar det
+> gå igenom.
+
 ## 4. Egen domän
 
-I Vercel: **Settings → Domains → Add**. Följ instruktionerna för DNS hos den
-som säljer domänen. SSL sköts automatiskt och kostar inget.
+Cloudflare: **Settings → Domains & Routes → Add**.
+Vercel: **Settings → Domains → Add**.
+
+Följ instruktionerna för DNS hos den som säljer domänen. SSL sköts automatiskt
+och kostar inget.
 
 ---
 
@@ -63,14 +84,8 @@ Vercels gratisplan (Hobby) är enligt deras villkor **endast för personligt,
 icke-kommersiellt bruk**, och de får stänga av projekt som bryter mot det utan
 förvarning. En sida åt ett företag räknas som kommersiell användning.
 
-Vill man inte betala för Vercel Pro fungerar sidan lika bra på **Cloudflare
-Pages**, som uttryckligen tillåter kundsajter gratis. Samma flöde — logga in
-med GitHub, välj repot — men två fält får fyllas i:
-
-| Fält | Värde |
-| --- | --- |
-| Build command | `npm run build` |
-| Build output directory | `out` |
+Vill man inte betala för Vercel Pro fungerar sidan lika bra på **Cloudflare**,
+som uttryckligen tillåter kundsajter gratis och har obegränsad bandbredd.
 
 `HANDOVER.md` går igenom valet, och vem som bör äga vilket konto.
 
