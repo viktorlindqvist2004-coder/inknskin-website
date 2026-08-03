@@ -20,21 +20,20 @@ export default function Contact() {
   const videoY = useTransform(scrollYProgress, [0, 1], ["-9%", "9%"]);
 
   return (
-    <section ref={ref} id="kontakt" className="edge relative py-[clamp(5rem,12vh,9rem)]">
-      <SectionHead index="08" label="Kontakt" />
+    <section ref={ref} id="kontakt" className="edge relative py-[clamp(3.5rem,8vh,6rem)]">
+      <SectionHead index="07" label="Kontakt" />
 
-      <div className="mt-12 grid gap-14 lg:grid-cols-[1fr_0.72fr] lg:gap-16">
+      <div className="mt-9 grid gap-12 lg:grid-cols-[1fr_0.72fr] lg:gap-16">
         <div className="flex flex-col">
           <MaskUp>
             <h2 className="display t-xl text-bone">Boka tid</h2>
           </MaskUp>
 
-          <p className="mt-8 max-w-lg text-[1rem] leading-relaxed text-bone-dim">
-            Skicka en DM med din idé — motiv, storlek och placering. Eller kom
-            förbi studion under bemannad tid.
+          <p className="mt-6 max-w-lg text-[1rem] leading-relaxed text-bone-dim">
+            DM:a din idé — motiv, storlek och placering. Eller kom förbi.
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-wrap gap-4">
             <Magnetic strength={0.3}>
               <a
                 href={contact.instagram}
@@ -66,7 +65,7 @@ export default function Contact() {
             </Magnetic>
           </div>
 
-          <div className="mt-16 grid gap-10 sm:grid-cols-2">
+          <div className="mt-12 grid gap-10 sm:grid-cols-2">
             <div>
               <span className="eyebrow">Studion</span>
               <address className="mt-4 not-italic text-[0.95rem] leading-relaxed text-bone">
@@ -76,10 +75,6 @@ export default function Contact() {
                 <br />
                 {contact.country}
               </address>
-              <p className="mt-3 text-[0.85rem] text-muted">
-                Ca 5 minuters promenad från Trollhättan Central.
-              </p>
-
               <div className="mt-6 flex flex-col gap-1.5 text-[0.9rem]">
                 <a
                   href={contact.instagram}

@@ -37,8 +37,12 @@ function Tile({
       data-cursor={work.style}
     >
       <div className="relative">
+        {/* Stående 4:5 på mobil, kvadratiskt från md och upp. Tre stående
+            rutor per kolumn gjorde portfolion till 2,4 skärmar på en bred
+            skärm — mer scroll än något annat avsnitt. Kvadraten tar bort en
+            femtedel av höjden per ruta utan att en enda bild plockas bort. */}
         <ImageReveal
-          className="relative aspect-[4/5] rounded-sm bg-ink-2"
+          className="relative aspect-[4/5] rounded-sm bg-ink-2 md:aspect-square"
           delay={(index % 3) * 0.09}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -99,7 +103,7 @@ function Column({
     <motion.div
       ref={ref}
       style={{ y }}
-      className={`flex flex-col gap-8 md:gap-12 ${className}`}
+      className={`flex flex-col gap-5 md:gap-6 ${className}`}
     >
       {works.map((w, i) => (
         <Tile key={w.src} work={w} index={i} skew={skew} />
@@ -121,7 +125,7 @@ export default function Gallery() {
   const mobileCols = portfolioColumns(2);
 
   return (
-    <section id="arbeten" className="relative py-[clamp(5rem,12vh,9rem)]">
+    <section id="arbeten" className="relative py-[clamp(3.5rem,8vh,6rem)]">
       <div className="edge">
         <SectionHead index="03" label="Arbeten" />
 
@@ -141,7 +145,7 @@ export default function Gallery() {
         </div>
       </div>
 
-      <div className="edge mt-16">
+      <div className="edge mt-10">
         {/* Desktop: columns at different parallax speeds.
             The offsets are a percentage of column height, so two wide columns
             travel far more pixels than three narrow ones for the same number —
@@ -155,31 +159,21 @@ export default function Gallery() {
             works={cols[1]}
             speed={wide ? -10 : -4}
             skew={skew}
-            className={wide ? "pt-20" : "pt-12"}
+            className={wide ? "pt-10" : "pt-6"}
           />
           {wide ? (
-            <Column works={cols[2]} speed={6} skew={skew} className="pt-8" />
+            <Column works={cols[2]} speed={6} skew={skew} className="pt-4" />
           ) : null}
         </div>
 
         {/* Mobile: two columns, every work still shown */}
         <div className="grid grid-cols-2 gap-5 md:hidden">
           <Column works={mobileCols[0]} speed={5} skew={skew} />
-          <Column works={mobileCols[1]} speed={-6} skew={skew} className="pt-10" />
+          <Column works={mobileCols[1]} speed={-6} skew={skew} className="pt-6" />
         </div>
       </div>
 
-      <div className="edge mt-20 flex flex-col items-center gap-6">
-        <motion.span
-          className="text-[0.7rem] uppercase tracking-[0.2em] text-muted"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.8 }}
-          transition={{ duration: 1 }}
-        >
-          {portfolio.length} arbeten visade
-        </motion.span>
-
+      <div className="edge mt-12 flex flex-col items-center">
         <a
           href={contact.instagram}
           target="_blank"

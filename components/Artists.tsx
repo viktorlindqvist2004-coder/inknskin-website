@@ -49,7 +49,7 @@ function Name({ name, className }: { name: string; className: string }) {
 function FocusTags({ artist }: { artist: Artist }) {
   const url = linkOf(artist);
   return (
-    <div className="mt-6 flex flex-wrap items-center gap-2">
+    <div className="mt-4 flex flex-wrap items-center gap-2">
       {artist.focus.map((f) => (
         <span
           key={f}
@@ -114,7 +114,7 @@ function Solo({ artist }: { artist: Artist }) {
 /** Två eller fler: rutnät av porträttkort. */
 function Grid({ list }: { list: readonly Artist[] }) {
   return (
-    <div className="mt-16 grid gap-14 md:grid-cols-2 md:gap-10">
+    <div className="mt-10 grid gap-10 md:grid-cols-2 md:gap-8">
       {list.map((a, i) => (
         <motion.article
           key={a.name}
@@ -138,7 +138,7 @@ function Grid({ list }: { list: readonly Artist[] }) {
             </div>
           </div>
 
-          <p className="mt-6 max-w-md text-[0.95rem] leading-relaxed text-bone-dim">
+          <p className="mt-5 max-w-md text-[0.92rem] leading-relaxed text-bone-dim">
             {a.bio}
           </p>
           <FocusTags artist={a} />
@@ -165,7 +165,7 @@ export default function Artists() {
     <section
       ref={ref}
       id="tatuerare"
-      className="relative overflow-hidden py-[clamp(5rem,12vh,9rem)]"
+      className="relative overflow-hidden py-[clamp(3.5rem,8vh,6rem)]"
     >
       {/* Barely-there footage wash behind the whole section. It sits at 13%
           opacity, so on phones the still poster is indistinguishable from the
@@ -190,7 +190,7 @@ export default function Artists() {
       <div className="edge">
         <SectionHead index="04" label={solo ? "Tatueraren" : "Tatuerare"} />
 
-        <MaskUp className="mt-10">
+        <MaskUp className="mt-8">
           <h2 className="display t-xl text-bone">Handen bakom</h2>
         </MaskUp>
 

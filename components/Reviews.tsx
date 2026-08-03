@@ -68,12 +68,13 @@ function fill(row: Review[]): Review[] {
 
 export default function Reviews() {
   const skew = useVelocitySkew(2);
-  const half = Math.ceil(reviews.length / 2);
-  const rowA = fill(reviews.slice(0, half));
-  const rowB = fill(reviews.slice(half).length ? reviews.slice(half) : reviews.slice(0, half));
+  // En rad med samtliga omdömen. Tidigare delades de på två rader som drev åt
+  // var sitt håll — det kostade en halv skärm i höjd utan att visa ett enda
+  // omdöme till, eftersom en marquee ändå spelar upp allt över tid.
+  const row = fill([...reviews]);
 
   return (
-    <section id="omdomen" className="relative overflow-hidden py-[clamp(5rem,12vh,9rem)]">
+    <section id="omdomen" className="relative overflow-hidden py-[clamp(3.5rem,8vh,6rem)]">
       <div className="edge">
         <SectionHead index="05" label="Omdömen" />
 
@@ -124,15 +125,10 @@ export default function Reviews() {
         ) : null}
       </div>
 
-      <div className="mt-14 flex flex-col gap-4 md:gap-6">
+      <div className="mt-10">
         <Marquee baseSpeed={38} direction={-1}>
-          {rowA.map((r, i) => (
-            <Card key={`a-${i}`} review={r} skew={skew} />
-          ))}
-        </Marquee>
-        <Marquee baseSpeed={38} direction={1}>
-          {rowB.map((r, i) => (
-            <Card key={`b-${i}`} review={r} skew={skew} />
+          {row.map((r, i) => (
+            <Card key={`r-${i}`} review={r} skew={skew} />
           ))}
         </Marquee>
       </div>

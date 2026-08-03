@@ -10,10 +10,10 @@ export default function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="edge relative py-[clamp(5rem,12vh,9rem)]">
-      <SectionHead index="07" label="Vanliga frågor" />
+    <section id="faq" className="edge relative py-[clamp(3.5rem,8vh,6rem)]">
+      <SectionHead index="06" label="Vanliga frågor" />
 
-      <div className="mt-12 grid gap-12 md:grid-cols-[0.7fr_1.3fr] md:gap-20">
+      <div className="mt-9 grid gap-10 md:grid-cols-[0.7fr_1.3fr] md:gap-16">
         <MaskUp className="md:sticky md:top-32 md:h-fit md:self-start">
           <h2 className="display t-lg text-bone">Frågor & svar</h2>
         </MaskUp>
