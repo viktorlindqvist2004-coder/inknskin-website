@@ -46,30 +46,28 @@ function Name({ name, className }: { name: string; className: string }) {
   );
 }
 
-function FocusTags({ artist }: { artist: Artist }) {
+/**
+ * Bara Instagram-länken.
+ *
+ * Här satt tidigare en rad stilmärkningar per person — "Fineline", "Blackwork",
+ * "Cover-up" och så vidare. De räknade upp exakt samma stilar som sektionen
+ * Arbetet redan listar två skärmar högre upp, och på mobil radbröt de till tre
+ * rader per tatuerare. `focus` ligger kvar i lib/site.ts eftersom den beskriver
+ * personen och kan behövas igen.
+ */
+function Handle({ artist }: { artist: Artist }) {
   const url = linkOf(artist);
+  if (!url) return null;
   return (
-    <div className="mt-4 flex flex-wrap items-center gap-2">
-      {artist.focus.map((f) => (
-        <span
-          key={f}
-          className="rounded-full border border-gold/30 px-3.5 py-1.5 text-[0.68rem] uppercase tracking-[0.14em] text-bone-dim transition-colors duration-500 group-hover:border-gold/55"
-        >
-          {f}
-        </span>
-      ))}
-      {url ? (
-        <a
-          href={url}
-          target="_blank"
-          rel="noreferrer"
-          data-cursor="Instagram"
-          className="rounded-full border border-gold/40 px-3.5 py-1.5 text-[0.68rem] uppercase tracking-[0.14em] text-gold transition-colors hover:bg-gold hover:text-ink"
-        >
-          {artist.handle}
-        </a>
-      ) : null}
-    </div>
+    <a
+      href={url}
+      target="_blank"
+      rel="noreferrer"
+      data-cursor="Instagram"
+      className="mt-4 inline-block rounded-full border border-gold/40 px-3.5 py-1.5 text-[0.68rem] uppercase tracking-[0.14em] text-gold transition-colors hover:bg-gold hover:text-ink"
+    >
+      {artist.handle}
+    </a>
   );
 }
 
@@ -105,7 +103,7 @@ function Solo({ artist }: { artist: Artist }) {
         <p className="mt-8 max-w-xl text-[clamp(1rem,1.5vw,1.2rem)] leading-relaxed text-bone-dim">
           {artist.bio}
         </p>
-        <FocusTags artist={artist} />
+        <Handle artist={artist} />
       </div>
     </motion.article>
   );
@@ -141,7 +139,7 @@ function Grid({ list }: { list: readonly Artist[] }) {
           <p className="mt-5 max-w-md text-[0.92rem] leading-relaxed text-bone-dim">
             {a.bio}
           </p>
-          <FocusTags artist={a} />
+          <Handle artist={a} />
         </motion.article>
       ))}
     </div>

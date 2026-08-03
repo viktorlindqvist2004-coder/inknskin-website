@@ -12,8 +12,8 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-gold/18 pt-16">
-      <div className="edge flex flex-col gap-10 pb-14 md:flex-row md:justify-between">
+    <footer className="relative overflow-hidden border-t border-gold/18 pt-10">
+      <div className="edge flex flex-col gap-8 pb-10 md:flex-row md:justify-between">
         <div className="flex flex-col gap-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.8, rotate: -14 }}
@@ -21,7 +21,7 @@ export default function Footer() {
             viewport={{ once: true, amount: 0.6 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Logo size={76} />
+            <Logo size={56} />
           </motion.div>
           <span className="eyebrow">Studion</span>
           <a
@@ -87,7 +87,7 @@ export default function Footer() {
         aria-hidden
       >
         <span
-          className="display block w-full whitespace-nowrap text-center text-[clamp(2rem,13vw,12rem)] leading-[0.85] tracking-[-0.04em] text-[#35312b]"
+          className="display block w-full whitespace-nowrap text-center text-[clamp(1.6rem,10vw,8rem)] leading-[0.85] tracking-[-0.04em] text-[#35312b]"
           style={{
             WebkitTextStrokeWidth: "1.5px",
             WebkitTextStrokeColor: "var(--color-gold)",

@@ -37,12 +37,12 @@ function Tile({
       data-cursor={work.style}
     >
       <div className="relative">
-        {/* Stående 4:5 på mobil, kvadratiskt från md och upp. Tre stående
-            rutor per kolumn gjorde portfolion till 2,4 skärmar på en bred
-            skärm — mer scroll än något annat avsnitt. Kvadraten tar bort en
-            femtedel av höjden per ruta utan att en enda bild plockas bort. */}
+        {/* Kvadratiskt överallt. Stående 4:5 gjorde portfolion till sidans
+            längsta avsnitt på både mobil och desktop — fyra rutor per kolumn
+            på en telefon. Kvadraten tar bort en femtedel av höjden per ruta
+            utan att en enda bild plockas bort. */}
         <ImageReveal
-          className="relative aspect-[4/5] rounded-sm bg-ink-2 md:aspect-square"
+          className="relative aspect-square rounded-sm bg-ink-2"
           delay={(index % 3) * 0.09}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}

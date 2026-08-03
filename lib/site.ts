@@ -52,17 +52,15 @@ export const contact: Contact = {
 };
 
 export const hours = {
-  staffed: [
-    { day: "Måndag", time: "12:00 – 16:30" },
-    { day: "Tisdag", time: "12:00 – 16:30" },
-    { day: "Onsdag", time: "12:00 – 16:30" },
-    { day: "Torsdag", time: "12:00 – 16:30" },
-    { day: "Fredag", time: "12:00 – 16:30" },
-    { day: "Lördag", time: "Bokning" },
-    { day: "Söndag", time: "Stängt" },
-  ],
-  note: "Tider utanför bemannad öppettid bokas via DM eller direkt i studion.",
+  summary: "Mån–fre 12:00–16:30",
+  note: "Lördag efter bokning. Andra tider via DM eller direkt i studion.",
 } as const;
+
+/* Ändras tiderna måste de ändras på fyra ställen — de tre andra har egna
+   kopior som inte läser härifrån:
+     · components/StructuredData.tsx  (openingHoursSpecification, för Google)
+     · components/Hero.tsx            (raden i hero-foten)
+     · components/Footer.tsx          (kolumnen "Bemannat") */
 
 /**
  * Lägg till fler objekt här om studion växer — sektionen byter automatiskt

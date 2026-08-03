@@ -105,29 +105,16 @@ export default function Contact() {
               </div>
             </div>
 
+            {/* Sju rader — en per veckodag — sa samma sak som två rader gör.
+                Fem av dem var identiska och två var "Bokning"/"Stängt". */}
             <div>
               <span className="eyebrow">Bemannade tider</span>
-              <ul className="mt-4 flex flex-col">
-                {hours.staffed.map((h, i) => (
-                  <motion.li
-                    key={h.day}
-                    className="flex items-baseline justify-between gap-4 border-b border-gold/18 py-2.5 text-[0.88rem] last:border-b-0"
-                    initial={{ opacity: 0, x: -12 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.8 }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: i * 0.04 }}
-                  >
-                    <span className="text-bone-dim">{h.day}</span>
-                    <span className="h-px flex-1 bg-gold/20" aria-hidden />
-                    <span
-                      className={h.time === "Stängt" ? "text-muted" : "text-bone tabular-nums"}
-                    >
-                      {h.time}
-                    </span>
-                  </motion.li>
-                ))}
-              </ul>
-              <p className="mt-4 text-[0.82rem] leading-relaxed text-muted">{hours.note}</p>
+              <p className="mt-4 text-[0.95rem] leading-relaxed text-bone">
+                {hours.summary}
+              </p>
+              <p className="mt-2 text-[0.85rem] leading-relaxed text-muted">
+                {hours.note}
+              </p>
             </div>
           </div>
         </div>
@@ -135,7 +122,7 @@ export default function Contact() {
         {/* Vertical film panel */}
         <div className="relative hidden lg:block">
           <ImageReveal
-            className="relative aspect-[9/14] rounded-sm bg-ink-2"
+            className="relative aspect-[4/5] rounded-sm bg-ink-2"
             from="top"
             duration={1.4}
           >

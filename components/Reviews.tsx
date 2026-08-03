@@ -31,7 +31,14 @@ function Card({ review, skew }: { review: Review; skew: MotionValue<number> }) {
   return (
     <motion.article style={{ skewY: skew }} className="mx-3 flex w-[clamp(19rem,29vw,26rem)] shrink-0 flex-col justify-between gap-6 rounded-sm border border-gold/22 bg-ink-2/80 p-7 md:backdrop-blur-sm transition-colors duration-500 hover:border-gold/40">
       <Stars n={review.rating} />
-      <p className="text-[0.95rem] leading-relaxed text-bone/85">“{review.body}”</p>
+      {/* Korten sträcks lika höga, så det längsta omdömet satte höjden på
+          alla tio. Ett av dem är 505 tecken mot 120 för medianen — det ensamt
+          fördubblade raden. Klippet är rent visuellt: hela texten ligger kvar
+          i markup, ordagrant, och "Läs alla omdömen på Google" står direkt
+          under raden. */}
+      <p className="line-clamp-6 text-[0.95rem] leading-relaxed text-bone/85">
+        “{review.body}”
+      </p>
       <footer className="flex items-end justify-between gap-4 border-t border-gold/18 pt-4">
         <div>
           <div className="text-[0.82rem] text-bone">{review.author}</div>
@@ -83,35 +90,27 @@ export default function Reviews() {
             <h2 className="display t-xl text-bone">Vad kunderna säger</h2>
           </MaskUp>
 
+          {/* Betyget på en rad. Tidigare två block sida vid sida med varsin
+              stor siffra, stjärnor under och en avdelare emellan — samma
+              uppgifter, tre gånger höjden. */}
           <motion.div
-            className="flex items-end gap-8"
+            className="flex flex-wrap items-baseline gap-x-4 gap-y-2"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.6 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div>
-              <div className="display flex items-baseline text-[clamp(3rem,7vw,5.5rem)] leading-none text-bone tabular-nums">
-                <Counter to={averageRating} decimals={1} />
-                <span className="ml-1 text-[0.42em] text-muted">/5</span>
-              </div>
-              <div className="mt-3">
-                <Stars n={Math.round(averageRating)} />
-              </div>
-            </div>
-            <div className="border-l border-gold/22 pl-8">
-              <div className="display flex items-baseline gap-2 text-[clamp(1.8rem,4vw,3rem)] leading-none text-bone tabular-nums">
-                {reviewCountApprox ? (
-                  <span className="text-[0.42em] uppercase tracking-[0.14em] text-gold">
-                    Över
-                  </span>
-                ) : null}
-                <Counter to={reviewCount} />
-              </div>
-              <div className="mt-2 text-[0.7rem] uppercase tracking-[0.16em] text-muted">
-                recensioner på Google
-              </div>
-            </div>
+            <span className="display flex items-baseline text-[clamp(2.4rem,5vw,3.6rem)] leading-none text-bone tabular-nums">
+              <Counter to={averageRating} decimals={1} />
+              <span className="ml-1 text-[0.42em] text-muted">/5</span>
+            </span>
+            <span className="translate-y-[-0.15em]">
+              <Stars n={Math.round(averageRating)} />
+            </span>
+            <span className="text-[0.72rem] uppercase tracking-[0.16em] text-muted">
+              {reviewCountApprox ? "Över " : ""}
+              {reviewCount} recensioner på Google
+            </span>
           </motion.div>
         </div>
 
