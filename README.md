@@ -6,6 +6,11 @@ Kungsgatan 3, Trollhättan. Byggs som en statisk sida — se HANDOVER.md.
 **Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 ·
 Motion (Framer Motion) · Lenis · självhostade variabla typsnitt via Fontsource.
 
+> **Källan är `viktorlindqvist2004-coder/inknskin-website`.** Allt arbete går
+> hit. Finns kopior av koden i andra repon — t.ex. ett som skapats genom att
+> ladda upp en zip — är de ögonblicksbilder, inte utvecklingsgrenar. Bygger
+> värden från en sådan kopia syns inga ändringar förrän värden pekas om hit.
+
 ---
 
 ## Omdömen
